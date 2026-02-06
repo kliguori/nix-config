@@ -8,8 +8,8 @@
     ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/wofi.nix
+    ./modules/ashell.nix
     ./modules/hyprland
-    ./modules/waybar
   ];
 
   # Theme options used by multiple modules

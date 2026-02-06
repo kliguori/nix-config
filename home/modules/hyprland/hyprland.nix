@@ -82,7 +82,7 @@ in
       ];
 
       exec-once = [
-        "waybar"
+        "ashell"
         # "hyprpaper"
         "hypridle"
       ];
