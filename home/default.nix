@@ -88,6 +88,7 @@
       stateVersion = "25.11";
 
       packages = with pkgs; [
+        brave
         spotify
         nerd-fonts.jetbrains-mono
 

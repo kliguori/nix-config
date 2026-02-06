@@ -3,7 +3,7 @@ let
   c = config.theme.colors;
   
   # Default apps
-  terminal = "kitty";
+  terminal = "ghostty";
   fileManager = "thunar";
   menu = "wofi --show drun";
   
