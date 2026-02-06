@@ -47,8 +47,6 @@
   };
 
   config = {
-    nixpkgs.config.allowUnfree = true;
-
     # Dracula theme
     theme = {
       name = "dracula";
