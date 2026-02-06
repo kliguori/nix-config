@@ -2,7 +2,7 @@
 {
   programs.ghostty = {
     enable = true;
-    package = pkgs.ghostty-bin;
+    package = pkgs.ghostty;
 
     settings = {
       # Auto update 
