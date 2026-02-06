@@ -53,7 +53,7 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               backupFileExtension = "backup";
-	      extraSpecialArgs = { inherit hostName hostId };
+	      extraSpecialArgs = { inherit hostName hostId; };
               users.kevin = import ./home;
             };
 	  }
