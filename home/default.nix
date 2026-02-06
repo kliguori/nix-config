@@ -5,7 +5,7 @@
    ./modules/git.nix
     ./modules/zsh.nix
     ./modules/starship.nix
-    ./modules/ghostty.nix
+    ./modules/kitty.nix
     ./modules/neovim.nix
     ./modules/wofi.nix
     ./modules/hyprland
