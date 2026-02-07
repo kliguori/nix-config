@@ -1,5 +1,5 @@
 {
-  description = "NixOS System Configurations";
+  description = "NixOS and NixDarwin System Configurations";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -35,82 +35,48 @@
       ...
     }:
     let
-      hostsNixOS = {
-        sherlock = {
-          system = "x86_64-linux";
-          hostId = "d302d58e"; # Generate hostID with: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
-          sshKey = "ssh-ed25519 AAAA... sherlock";
-        };
+      mkSystem =
+        hostName: system:
+        let
+          isDarwin = nixpkgs.lib.hasSuffix "-darwin" system;
 
-        watson = {
-          system = "x86_64-linux";
-          hostId = "a8c07b12"; # Generate hostID with: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
-          sshKey = "ssh-ed25519 AAAA... watson";
-        };
-      };
+          homeManagerModule = {
+            home-manager = {
+              useUserPackages = true;
+              useGlobalPkgs = true;
+              backupFileExtension = "backup";
+              extraSpecialArgs = { inherit inputs hostName; };
+              users.kevin.imports = [
+                inputs.nixvim.homeModules.nixvim
+                ./home
+              ];
+            };
+          };
 
-      hostsDarwin = {
-        macbook = {
-          system = "aarch64-darwin";
-          sshKey = "ssh-ed25519 AAAA... macbook";
-        };
-      };
+          diskoModule = {
+            disko.devices = import ./systems/${hostName}/disko.nix;
+          };
 
-      # Function to make NixOS systems
-      mkNixOS =
-        {
-          hostName,
-          hostId,
-          system,
-        }:
-        nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs hostName hostId; };
-          modules = [
-            ./systems/${hostName}
-            inputs.impermanence.nixosModules.impermanence
-            inputs.home-manager.nixosModules.home-manager
-            inputs.disko.nixosModules.disko
-            inputs.agenix.nixosModules.default
-            {
-              home-manager = {
-                useUserPackages = true;
-                useGlobalPkgs = true;
-                backupFileExtension = "backup";
-                extraSpecialArgs = { inherit inputs hostName hostId; };
-                users.kevin = {
-                  imports = [
-                    inputs.nixvim.homeModules.nixvim
-                    ./home
-                  ];
-                };
-              };
-            }
-            { disko.devices = import ./systems/${hostName}/disko.nix; }
-          ];
-        };
-
-      # Function to make Darwin systems
-      mkDarwin =
-        { hostName, system }:
-        nix-darwin.lib.darwinSystem {
+          platformModules =
+            if isDarwin then
+              [
+                inputs.home-manager.darwinModules.home-manager
+              ]
+            else
+              [
+                inputs.impermanence.nixosModules.impermanence
+                inputs.home-manager.nixosModules.home-manager
+                inputs.agenix.nixosModules.default
+                inputs.disko.nixosModules.disko
+                diskoModule
+              ];
+        in
+        (if isDarwin then nix-darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem) {
           inherit system;
           specialArgs = { inherit inputs hostName; };
-          modules = [
+          modules = platformModules ++ [
             ./systems/${hostName}
-            inputs.home-manager.darwinModules.home-manager
-            {
-              home-manager = {
-                useUserPackages = true;
-                useGlobalPkgs = true;
-                backupFileExtension = "backup";
-                extraSpecialArgs = { inherit inputs hostName; };
-                users.kevin.imports = [
-                  inputs.nixvim.homeModules.nixvim
-                  ./home
-                ];
-              };
-            }
+            homeManagerModule
           ];
         };
     in
@@ -120,21 +86,13 @@
         aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
       };
 
-      nixosConfigurations = nixpkgs.lib.mapAttrs (
-        hostName: cfg:
-        mkNixOS {
-          inherit hostName;
-          system = cfg.system;
-          hostId = cfg.hostId;
-        }
-      ) hostsNixOS;
+      nixosConfigurations = {
+        sherlock = mkSystem "sherlock" "x86_64-linux";
+        watson = mkSystem "watson" "x86_64-linux";
+      };
 
-      darwinConfigurations = nixpkgs.lib.mapAttrs (
-        hostName: cfg:
-        mkDarwin {
-          inherit hostName;
-          system = cfg.system;
-        }
-      ) hostsDarwin;
+      darwinConfigurations = {
+        macbook = mkSystem "macbook" "aarch64-darwin";
+      };
     };
 }

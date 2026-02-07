@@ -1,16 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  hostName,
-  hostId,
-  ...
-}:
-
+{ lib, hostName, ... }:
 {
   networking = {
     hostName = hostName;
-    hostId = hostId;
+    hostId = "d302d58e";
     useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
 
