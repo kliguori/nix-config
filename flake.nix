@@ -70,7 +70,6 @@
               users.kevin = {
                 imports = [
                   inputs.nixvim.homeModules.nixvim
-                  inputs.nix-colors.homeManagerModules.default
                   ./home
                 ];
               };
