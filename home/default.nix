@@ -99,7 +99,7 @@
 
         # Language servers and formatters
         nixd
-        nixfmt
+        nixfmt-rfc-style
         pyright
         black
         ruff
