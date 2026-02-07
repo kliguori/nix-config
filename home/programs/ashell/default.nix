@@ -22,7 +22,6 @@ in
       };
       
       modules-left = [
-        "settings"
         "workspaces"
       ];
       modules-center = [
@@ -32,13 +31,15 @@ in
         "media-player"
         "system-info"
         "tray"
+        "settings"
         "clock"
       ];
       
-      # Workspaces
+      # Workspaces Configuration
       workspaces = {
-        format = "{name}";
-        on-click = "activate";
+        visibility_mode = "All";
+        enable_workspace_filling = true;
+        max_workspaces = 10;
       };
       
       # Window Title
@@ -58,10 +59,26 @@ in
         format-paused = " {artist} - {title}";
       };
       
-      # System Info
+      # System Info - Configure indicators
       system-info = {
-        format = "  {cpu}%   {memory}%";
-        interval = 5;
+        indicators = [ "Cpu" "Memory" "Temperature" ];
+      };
+      
+      # System Info Thresholds
+      "system-info.cpu" = {
+        warn_threshold = 60;
+        alert_threshold = 80;
+      };
+      
+      "system-info.memory" = {
+        warn_threshold = 70;
+        alert_threshold = 85;
+      };
+      
+      "system-info.temperature" = {
+        warn_threshold = 60;
+        alert_threshold = 80;
+        sensor = "acpitz temp1";
       };
       
       # Tray
@@ -70,9 +87,13 @@ in
         spacing = 10;
       };
       
-      # Settings
+      # Settings Module
       settings = {
-        # Settings module configuration
+        lock_cmd = "hyprlock &";
+        shutdown_cmd = "shutdown now";
+        suspend_cmd = "systemctl suspend";
+        reboot_cmd = "systemctl reboot";
+        logout_cmd = "loginctl kill-user $(whoami)";
       };
     };
   };
