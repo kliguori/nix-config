@@ -19,7 +19,7 @@
         transparent = false;
         commentStyle = { italic = true; };
         keywordStyle = { italic = true; };
-        theme = "wave";
+        theme = "dragon";
       };
     };
 
