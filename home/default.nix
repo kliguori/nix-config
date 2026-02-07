@@ -6,7 +6,8 @@
     ./modules/zsh.nix
     ./modules/starship.nix
     ./modules/kitty.nix
-    ./modules/neovim.nix
+    # ./modules/neovim.nix
+    ./programs/nixvim
     ./modules/wofi.nix
     ./modules/ashell.nix
     ./modules/hyprland
