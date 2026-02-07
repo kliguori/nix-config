@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
-    impermanence.url = "github:nix-community/impermanence";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +20,7 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    impermanence.url = "github:nix-community/impermanence";
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -67,10 +67,13 @@
               useGlobalPkgs = true;
               backupFileExtension = "backup";
 	            extraSpecialArgs = { inherit inputs hostName hostId; };
-              users.kevin.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
-                ./home
-              ];
+              users.kevin = {
+                imports = [
+                  inputs.nixvim.homeModules.nixvim
+                  inputs.nix-colors.homeManagerModules.default
+                  ./home
+                ];
+              };
             };
 	        }
           { disko.devices = import ./systems/${hostName}/disko.nix; }
@@ -92,7 +95,7 @@
               backupFileExtension = "backup";
 	            extraSpecialArgs = { inherit inputs hostName; };
               users.kevin.imports = [
-                inputs.nixvim.homeManagerModules.nixvim
+                inputs.nixvim.homeModules.nixvim
                 ./home
               ];
             };

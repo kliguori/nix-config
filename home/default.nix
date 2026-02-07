@@ -50,35 +50,35 @@
   config = {
     # Dracula theme
     theme = {
-      name = "dracula";
+      name = "kanagawa-wave";
       colors = {
-        background = "#282a36";
-        foreground = "#f8f8f2";
-        selection = "#44475a";
-        comment = "#6272a4";
-
-        cyan = "#8be9fd";
-        green = "#50fa7b";
-        orange = "#ffb86c";
-        pink = "#ff79c6";
-        purple = "#bd93f9";
-        red = "#ff5555";
-        yellow = "#f1fa8c";
-
-        currentLine = "#44475a";
+        background = "#1F1F28";
+        foreground = "#DCD7BA";
+        selection = "#2D4F67";
+        comment = "#727169";
+        cyan = "#7AA89F";
+        green = "#98BB6C";
+        orange = "#FFA066";
+        pink = "#D27E99";
+        purple = "#957FB8";
+        red = "#E82424";
+        yellow = "#E6C384";
+        currentLine = "#2A2A37";
+        blue = "#7E9CD8";  
 
         # RGB versions (without #) for Hyprland
-        bgRgb = "282a36";
-        fgRgb = "f8f8f2";
-        selectionRgb = "44475a";
-        commentRgb = "6272a4";
-        cyanRgb = "8be9fd";
-        greenRgb = "50fa7b";
-        orangeRgb = "ffb86c";
-        pinkRgb = "ff79c6";
-        purpleRgb = "bd93f9";
-        redRgb = "ff5555";
-        yellowRgb = "f1fa8c";
+        bgRgb = "1F1F28";
+        fgRgb = "DCD7BA";
+        selectionRgb = "2D4F67";
+        commentRgb = "727169";
+        cyanRgb = "7AA89F";
+        greenRgb = "98BB6C";
+        orangeRgb = "FFA066";
+        pinkRgb = "D27E99";
+        purpleRgb = "957FB8";
+        redRgb = "E82424";
+        yellowRgb = "E6C384";
+        blueRgb = "7E9CD8";
       };
     };
 
