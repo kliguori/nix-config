@@ -16,7 +16,7 @@
     colorschemes.kanagawa = {
       enable = true;
       settings = {
-        transparent = true;
+        transparent = false;
         commentStyle = { italic = true; };
         keywordStyle = { italic = true; };
         theme = "wave";
