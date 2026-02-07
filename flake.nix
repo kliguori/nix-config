@@ -66,8 +66,11 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               backupFileExtension = "backup";
-	            extraSpecialArgs = { inherit hostName hostId; };
-              users.kevin = import ./home;
+	            extraSpecialArgs = { inherit inputs hostName hostId; };
+              users.kevin.imports = [
+                inputs.nixvim.homeManagerModules.nixvim
+                ./home
+              ];
             };
 	        }
           { disko.devices = import ./systems/${hostName}/disko.nix; }
@@ -87,8 +90,11 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               backupFileExtension = "backup";
-	            extraSpecialArgs = { inherit hostName; };
-              users.kevin = import ./home;
+	            extraSpecialArgs = { inherit inputs hostName; };
+              users.kevin.imports = [
+                inputs.nixvim.homeManagerModules.nixvim
+                ./home
+              ];
             };
 	        }
         ];
