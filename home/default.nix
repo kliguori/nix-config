@@ -1,19 +1,23 @@
-{ config, lib, pkgs, ... }:
 {
-  # Import all program modules (NixOS/Linux only)
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  # Import all program programs (NixOS/Linux only)
   imports = [
-   ./modules/git.nix
-    ./modules/zsh.nix
-    ./modules/starship.nix
-    ./modules/kitty.nix
-    # ./modules/neovim.nix
+    ./programs/git
+    ./programs/zsh
+    ./programs/starship
+    ./programs/kitty
     ./programs/nixvim
-    ./modules/wofi.nix
-    ./modules/ashell.nix
-    ./modules/hyprland
+    ./programs/wofi
+    ./programs/ashell
+    ./programs/hyprland
   ];
 
-  # Theme options used by multiple modules
+  # Theme options used by multiple programs
   options.theme = {
     name = lib.mkOption {
       type = lib.types.str;
@@ -64,7 +68,7 @@
         red = "#E82424";
         yellow = "#E6C384";
         currentLine = "#2A2A37";
-        blue = "#7E9CD8";  
+        blue = "#7E9CD8";
 
         # RGB versions (without #) for Hyprland
         bgRgb = "1F1F28";
