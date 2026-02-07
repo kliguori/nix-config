@@ -17,8 +17,12 @@
       enable = true;
       settings = {
         transparent = false;
-        commentStyle = { italic = true; };
-        keywordStyle = { italic = true; };
+        commentStyle = {
+          italic = true;
+        };
+        keywordStyle = {
+          italic = true;
+        };
         theme = "wave";
       };
     };

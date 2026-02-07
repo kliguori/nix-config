@@ -15,8 +15,14 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [ "fmask=0022" "dmask=0022" ];
-              extraArgs = [ "-n" "NIXBOOT" ];
+              mountOptions = [
+                "fmask=0022"
+                "dmask=0022"
+              ];
+              extraArgs = [
+                "-n"
+                "NIXBOOT"
+              ];
             };
           };
           root = {
@@ -24,11 +30,18 @@
             size = "100%";
             content = {
               type = "btrfs";
-              extraArgs = [ "-f" "-L" "nixos" ];
+              extraArgs = [
+                "-f"
+                "-L"
+                "nixos"
+              ];
               subvolumes = {
                 "@nix" = {
                   mountpoint = "/nix";
-                  mountOptions = [ "compress=zstd" "noatime" ];
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                  ];
                 };
                 "@persist" = {
                   mountpoint = "/persist";
@@ -41,7 +54,7 @@
       };
     };
 
-    # Home drive 
+    # Home drive
     home = {
       type = "disk";
       device = "/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_1TB_S4P4NF0M605101P";
@@ -53,7 +66,11 @@
             size = "100%";
             content = {
               type = "btrfs";
-              extraArgs = [ "-f" "-L" "home" ];
+              extraArgs = [
+                "-f"
+                "-L"
+                "home"
+              ];
               subvolumes = {
                 "@home" = {
                   mountpoint = "/home";

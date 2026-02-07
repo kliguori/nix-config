@@ -27,104 +27,114 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, nix-darwin, ... }:
-  let
-    hostsNixOS = {
-      sherlock = {
-        system = "x86_64-linux";
-        hostId = "d302d58e"; # Generate hostID with: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
-        sshKey = "ssh-ed25519 AAAA... sherlock";
-      };
-    
-       watson = {
-        system = "x86_64-linux";
-        hostId = "a8c07b12"; # Generate hostID with: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
-        sshKey = "ssh-ed25519 AAAA... watson";
-      };
-    };
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      nix-darwin,
+      ...
+    }:
+    let
+      hostsNixOS = {
+        sherlock = {
+          system = "x86_64-linux";
+          hostId = "d302d58e"; # Generate hostID with: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
+          sshKey = "ssh-ed25519 AAAA... sherlock";
+        };
 
-    hostsDarwin = {
-      macbook = {
-        system = "aarch64-darwin";
-        sshKey = "ssh-ed25519 AAAA... macbook";
+        watson = {
+          system = "x86_64-linux";
+          hostId = "a8c07b12"; # Generate hostID with: head -c4 /dev/urandom | od -An -tx1 | tr -d ' \n'
+          sshKey = "ssh-ed25519 AAAA... watson";
+        };
       };
-    };
 
-    # Function to make NixOS systems
-    mkNixOS = { hostName, hostId, system }:
-      nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = { inherit inputs hostName hostId; };
-        modules = [
-          ./systems/${hostName}
-          inputs.impermanence.nixosModules.impermanence
-          inputs.home-manager.nixosModules.home-manager
-          inputs.disko.nixosModules.disko 
-          inputs.agenix.nixosModules.default
-	        {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              backupFileExtension = "backup";
-	            extraSpecialArgs = { inherit inputs hostName hostId; };
-              users.kevin = {
-                imports = [
+      hostsDarwin = {
+        macbook = {
+          system = "aarch64-darwin";
+          sshKey = "ssh-ed25519 AAAA... macbook";
+        };
+      };
+
+      # Function to make NixOS systems
+      mkNixOS =
+        {
+          hostName,
+          hostId,
+          system,
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs hostName hostId; };
+          modules = [
+            ./systems/${hostName}
+            inputs.impermanence.nixosModules.impermanence
+            inputs.home-manager.nixosModules.home-manager
+            inputs.disko.nixosModules.disko
+            inputs.agenix.nixosModules.default
+            {
+              home-manager = {
+                useUserPackages = true;
+                useGlobalPkgs = true;
+                backupFileExtension = "backup";
+                extraSpecialArgs = { inherit inputs hostName hostId; };
+                users.kevin = {
+                  imports = [
+                    inputs.nixvim.homeModules.nixvim
+                    ./home
+                  ];
+                };
+              };
+            }
+            { disko.devices = import ./systems/${hostName}/disko.nix; }
+          ];
+        };
+
+      # Function to make Darwin systems
+      mkDarwin =
+        { hostName, system }:
+        nix-darwin.lib.darwinSystem {
+          inherit system;
+          specialArgs = { inherit inputs hostName; };
+          modules = [
+            ./systems/${hostName}
+            inputs.home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                useUserPackages = true;
+                useGlobalPkgs = true;
+                backupFileExtension = "backup";
+                extraSpecialArgs = { inherit inputs hostName; };
+                users.kevin.imports = [
                   inputs.nixvim.homeModules.nixvim
                   ./home
                 ];
               };
-            };
-	        }
-          { disko.devices = import ./systems/${hostName}/disko.nix; }
-        ];
+            }
+          ];
+        };
+    in
+    {
+      formatter = {
+        x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-tree;
+        aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
       };
 
-    # Function to make Darwin systems
-    mkDarwin = { hostName, system }:
-      nix-darwin.lib.darwinSystem {
-        inherit system;
-        specialArgs = { inherit inputs hostName; };
-        modules = [
-          ./systems/${hostName}
-          inputs.home-manager.darwinModules.home-manager
-	        {
-            home-manager = {
-              useUserPackages = true;
-              useGlobalPkgs = true;
-              backupFileExtension = "backup";
-	            extraSpecialArgs = { inherit inputs hostName; };
-              users.kevin.imports = [
-                inputs.nixvim.homeModules.nixvim
-                ./home
-              ];
-            };
-	        }
-        ];
-      };
-  in
-  {
-    formatter = {
-      x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
-      aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-rfc-style;
+      nixosConfigurations = nixpkgs.lib.mapAttrs (
+        hostName: cfg:
+        mkNixOS {
+          inherit hostName;
+          system = cfg.system;
+          hostId = cfg.hostId;
+        }
+      ) hostsNixOS;
+
+      darwinConfigurations = nixpkgs.lib.mapAttrs (
+        hostName: cfg:
+        mkDarwin {
+          inherit hostName;
+          system = cfg.system;
+        }
+      ) hostsDarwin;
     };
-
-    nixosConfigurations =
-      nixpkgs.lib.mapAttrs
-        (hostName: cfg:
-          mkNixOS {
-            inherit hostName;
-            system = cfg.system;
-            hostId = cfg.hostId;
-          }
-        ) hostsNixOS;
-
-    darwinConfigurations =
-      nixpkgs.lib.mapAttrs
-        (hostName: cfg:
-          mkDarwin {
-            inherit hostName;
-            system = cfg.system;
-          }
-        ) hostsDarwin;
-  };
 }

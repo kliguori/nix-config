@@ -1,4 +1,9 @@
-{ config, lib, pkgs,... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   # --- Nixpkgs settings ---
   nixpkgs.config.allowUnfree = true;
@@ -6,7 +11,10 @@
   # --- Nix settings ---
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
       allowed-users = [ "@wheel" ];
     };
@@ -33,7 +41,7 @@
 
   # --- ZSH ---
   programs.zsh.enable = true;
-  
+
   # --- Packages ---
   environment.systemPackages = with pkgs; [
     tree
@@ -44,7 +52,7 @@
     wget
     eza
     jq
-    dnsutils 
+    dnsutils
     iproute2
     iputils
     nmap

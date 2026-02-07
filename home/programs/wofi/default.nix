@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   c = config.theme.colors;
   f = config.theme.fonts;
@@ -6,7 +11,7 @@ in
 {
   programs.wofi = {
     enable = true;
-    
+
     settings = {
       width = 600;
       height = 400;
@@ -24,7 +29,7 @@ in
       image_size = 40;
       gtk_dark = true;
     };
-    
+
     style = ''
       * {
         font-family: "${f.mono}";

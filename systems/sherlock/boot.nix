@@ -1,10 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # --- Boot settings ---
   boot = {
     kernelParams = [
-      "zfs.zfs_arc_max=4294967296"  # Limit ZFS ARC to 4GB
+      "zfs.zfs_arc_max=4294967296" # Limit ZFS ARC to 4GB
     ];
     kernelModules = [ "sg" ];
     loader = {
@@ -15,7 +20,7 @@
     zfs = {
       # requestEncryptionCredentials = true; # no zfs encryption right now
       # forceImportAll = true;
-      # extraPools = [ 
+      # extraPools = [
       #   "rpool"
       #   "hpool"
       #   "dpool"
@@ -34,7 +39,7 @@
         "sd_mod"
         "rtsx_pci_sdmmc"
       ];
-      
+
       # Rollback to blank root on boot
       postDeviceCommands = lib.mkAfter ''
         zpool import -N -f rpool

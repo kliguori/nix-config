@@ -1,4 +1,10 @@
-{ config, lib, pkgs, hostName, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  hostName,
+  ...
+}:
 {
   programs.zsh = {
     enable = true;
@@ -14,9 +20,9 @@
     };
 
     shellAliases = {
-      # filesystem 
-      ll  = "ls -lah";
-      cl   = "clear";
+      # filesystem
+      ll = "ls -lah";
+      cl = "clear";
       ".." = "cd ..";
 
       # git
@@ -29,7 +35,7 @@
 
       # neovim
       vi = "nvim";
-      
+
       # nixos
       nrs = "sudo nixos-rebuild switch --flake ~/nix-config#${hostName}";
     };

@@ -15,14 +15,23 @@
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
-              mountOptions = [ "fmask=0022" "dmask=0022" ];
-              extraArgs = [ "-n" "NIXBOOT" ];
+              mountOptions = [
+                "fmask=0022"
+                "dmask=0022"
+              ];
+              extraArgs = [
+                "-n"
+                "NIXBOOT"
+              ];
             };
           };
           rpool = {
             name = "rpool";
             size = "100%";
-            content = { type = "zfs"; pool = "rpool"; };
+            content = {
+              type = "zfs";
+              pool = "rpool";
+            };
           };
         };
       };
@@ -38,7 +47,10 @@
           hpool = {
             name = "hpool";
             size = "100%";
-            content = { type = "zfs"; pool = "hpool"; };
+            content = {
+              type = "zfs";
+              pool = "hpool";
+            };
           };
         };
       };
@@ -54,7 +66,10 @@
           dpool = {
             name = "dpool";
             size = "100%";
-            content = { type = "zfs"; pool = "dpool"; };
+            content = {
+              type = "zfs";
+              pool = "dpool";
+            };
           };
         };
       };
@@ -70,7 +85,10 @@
           spool = {
             name = "spool";
             size = "100%";
-            content = { type = "zfs"; pool = "spool"; };
+            content = {
+              type = "zfs";
+              pool = "spool";
+            };
           };
         };
       };
@@ -96,25 +114,25 @@
         root = {
           type = "zfs_fs";
           postCreateHook = "zfs snapshot rpool/root@blank";
-          options = { 
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
         nix = {
           type = "zfs_fs";
-          options = { 
-	    atime = "off";
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            atime = "off";
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
         persist = {
           type = "zfs_fs";
-          options = { 
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
       };
     };
@@ -136,10 +154,10 @@
       datasets = {
         home = {
           type = "zfs_fs";
-          options = { 
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
       };
     };
@@ -161,17 +179,17 @@
       datasets = {
         media = {
           type = "zfs_fs";
-          options = { 
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
         share = {
           type = "zfs_fs";
-          options = { 
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
       };
     };
@@ -193,10 +211,10 @@
       datasets = {
         scratch = {
           type = "zfs_fs";
-          options = { 
-	    canmount = "noauto";
-	    mountpoint = "legacy";
-	  };
+          options = {
+            canmount = "noauto";
+            mountpoint = "legacy";
+          };
         };
       };
     };

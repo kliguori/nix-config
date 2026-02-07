@@ -1,7 +1,14 @@
-{ config, lib, pkgs, modulesPath, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}:
 {
   # --- Imports ---
-  imports = [ 
+  imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-laptop
@@ -15,7 +22,7 @@
   ];
 
   # --- State version ---
-  system.stateVersion = "25.11"; 
+  system.stateVersion = "25.11";
 
   # --- Services ---
   services = {
@@ -23,7 +30,7 @@
     pulseaudio.enable = false; # Disable pulseaudio
     zfs.autoScrub.enable = true; # Enable automatic scrubbing of ZFS pools
     tailscale.enable = true; # Enable  tailscale
-    
+
     # Enable pipewire
     pipewire = {
       enable = true;
@@ -31,7 +38,7 @@
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
-    }; 
+    };
 
     # Enable SSH
     openssh = {
@@ -53,10 +60,10 @@
       xwayland.enable = false;
     };
   };
-  
+
   # --- Security settings ---
   security.pam.services.hyprlock = { }; # For hyprlock to work
-  
+
   # --- Packages ---
   environment.systemPackages = with pkgs; [
     # Hyprland related packages
@@ -73,8 +80,7 @@
     wlogout
     wofi
   ];
-  
-  
+
   # --- Wayland environment settings ---
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

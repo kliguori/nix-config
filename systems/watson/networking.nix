@@ -1,10 +1,17 @@
-{ config, lib, pkgs, hostName, hostId, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  hostName,
+  hostId,
+  ...
+}:
 
 {
-  networking = { 
+  networking = {
     hostName = hostName;
-    hostId = hostId;  
-    useDHCP = lib.mkDefault true; 
+    hostId = hostId;
+    useDHCP = lib.mkDefault true;
     networkmanager.enable = true;
 
     firewall = {

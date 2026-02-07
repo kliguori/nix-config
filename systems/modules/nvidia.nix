@@ -1,4 +1,10 @@
-{ config, lib, pkgs, hostName, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  hostName,
+  ...
+}:
 let
   isWatson = hostName == "watson";
 in

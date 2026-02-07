@@ -7,7 +7,7 @@ in
   programs.starship = {
     enable = true;
     settings = {
-      add_newline = true;   
+      add_newline = true;
       right_format = "$time";
       format = "$nix_shell$directory$git_branch$git_status$cmd_duration$character";
 

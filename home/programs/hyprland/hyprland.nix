@@ -1,12 +1,18 @@
-{ config, lib, pkgs, hostName, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  hostName,
+  ...
+}:
 let
   c = config.theme.colors;
-  
+
   # Default apps
   terminal = "kitty";
   fileManager = "thunar";
   menu = "wofi --show drun";
-  
+
   # Host-specific monitor configurations
   monitorConfigs = {
     # Sherlock - Desktop with 2 monitors
@@ -14,17 +20,17 @@ let
       "HDMI-A-1,2560x1440,0x0,1"
       "HDMI-A-2,2560x1440,2560x0,1"
     ];
-    
+
     # Watson - Laptop with single monitor
     watson = [
       "eDP-1,preferred,auto,1"
     ];
-    
+
     # Default fallback
     default = [ ",preferred,auto,1" ];
   };
-  
-  # Host-specific workspace configurations  
+
+  # Host-specific workspace configurations
   workspaceConfigs = {
     # Sherlock - Split workspaces across 2 monitors
     sherlock = [
@@ -38,7 +44,7 @@ let
       "8,monitor:HDMI-A-2"
       "9,monitor:HDMI-A-2"
     ];
-    
+
     # Watson - All workspaces on laptop screen
     watson = [
       "1,default:true"
@@ -51,7 +57,7 @@ let
       "8"
       "9"
     ];
-    
+
     # Default fallback
     default = [
       "1,default:true"
@@ -61,7 +67,7 @@ let
       "5"
     ];
   };
-  
+
   # Get config for current host or use default
   monitors = monitorConfigs.${hostName} or monitorConfigs.default;
   workspaces = workspaceConfigs.${hostName} or workspaceConfigs.default;

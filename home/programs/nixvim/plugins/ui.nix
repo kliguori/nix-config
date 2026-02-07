@@ -2,7 +2,7 @@
 {
   programs.nixvim.plugins = {
     lualine.enable = true;
-    
+
     bufferline = {
       enable = true;
       settings = {
