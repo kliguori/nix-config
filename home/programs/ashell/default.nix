@@ -8,143 +8,72 @@ in
     settings = {
       position = "top";
       height = 30;
-
-      # Kanagawa colors
-      layer = "top";
-      background-color = c.background;
-      color = c.foreground;
-
+      
+      # Theming
+      theme = {
+        background = c.background;
+        foreground = c.foreground;
+        selection = c.selection;
+        primary = c.purple;
+        success = c.green;
+        warning = c.yellow;
+        error = c.red;
+        info = c.cyan;
+      };
+      
       modules-left = [
-        "hyprland/workspaces"
-        "hyprland/window"
+        "settings"
+        "workspaces"
       ];
       modules-center = [
-        "clock"
+        "window-title"
       ];
       modules-right = [
-        "network"
-        "pulseaudio"
-        "battery"
+        "media-player"
+        "system-info"
         "tray"
+        "clock"
       ];
-
-      "hyprland/workspaces" = {
+      
+      # Workspaces
+      workspaces = {
         format = "{name}";
         on-click = "activate";
       };
-
-      "hyprland/window" = {
+      
+      # Window Title
+      window-title = {
         max-length = 50;
       };
-
+      
+      # Clock
       clock = {
         format = "{:%H:%M}";
         tooltip-format = "{:%Y-%m-%d}";
       };
-
-      battery = {
-        states = {
-          warning = 30;
-          critical = 15;
-        };
-        format = "{capacity}% {icon}";
-        format-charging = "{capacity}% ";
-        format-warning = "{capacity}% ";
-        format-critical = "{capacity}% ";
+      
+      # Media Player
+      media-player = {
+        format = "{artist} - {title}";
+        format-paused = " {artist} - {title}";
       };
-
-      network = {
-        format-wifi = "{essid} ";
-        format-ethernet = "{ipaddr} ";
-        format-disconnected = "Disconnected ⚠";
+      
+      # System Info
+      system-info = {
+        format = "  {cpu}%   {memory}%";
+        interval = 5;
       };
-
-      pulseaudio = {
-        format = "{volume}% {icon}";
-        format-muted = " muted";
-        format-icons = {
-          default = [
-            ""
-            ""
-            ""
-          ];
-        };
+      
+      # Tray
+      tray = {
+        icon-size = 16;
+        spacing = 10;
+      };
+      
+      # Settings
+      settings = {
+        # Settings module configuration
       };
     };
-
-    # Custom CSS styling with Kanagawa colors
-    style = ''
-      * {
-        font-family: ${config.theme.fonts.mono};
-        font-size: ${toString config.theme.fonts.size}px;
-        border: none;
-        border-radius: 0;
-      }
-
-      window#waybar {
-        background-color: ${c.background};
-        color: ${c.foreground};
-      }
-
-      #workspaces button {
-        padding: 0 8px;
-        color: ${c.comment};
-        background-color: transparent;
-      }
-
-      #workspaces button.active {
-        color: ${c.foreground};
-        background-color: ${c.purple};
-      }
-
-      #workspaces button:hover {
-        background-color: ${c.selection};
-        color: ${c.foreground};
-      }
-
-      #window,
-      #clock,
-      #battery,
-      #network,
-      #pulseaudio {
-        padding: 0 10px;
-        margin: 0 2px;
-        background-color: ${c.currentLine};
-        color: ${c.foreground};
-      }
-
-      #battery.charging {
-        color: ${c.green};
-      }
-
-      #battery.warning {
-        color: ${c.yellow};
-      }
-
-      #battery.critical {
-        color: ${c.red};
-        animation: blink 1s linear infinite;
-      }
-
-      @keyframes blink {
-        to {
-          color: ${c.background};
-          background-color: ${c.red};
-        }
-      }
-
-      #network.disconnected {
-        color: ${c.comment};
-      }
-
-      #pulseaudio.muted {
-        color: ${c.comment};
-      }
-
-      #tray {
-        padding: 0 10px;
-        background-color: ${c.currentLine};
-      }
-    '';
   };
 }
