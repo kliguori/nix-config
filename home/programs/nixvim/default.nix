@@ -13,7 +13,15 @@
     vimAlias = true;
     defaultEditor = true;
 
-    colorschemes.dracula.enable = true;
+    colorschemes.kanagawa = {
+      enable = true;
+      settings = {
+        transparent = true;
+        commentStyle = { italic = true; };
+        keywordStyle = { italic = true; };
+        theme = "wave";
+      };
+    };
 
     # All extra Lua config in one place
     extraConfigLua = ''
