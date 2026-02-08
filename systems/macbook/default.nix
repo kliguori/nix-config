@@ -8,12 +8,15 @@
   system.stateVersion = 6;
 
   # Nix settings
-  nix.settings = {
-    experimental-features = "nix-command flakes";
-    trusted-users = [
-      "root"
-      "kevin"
-    ];
+  nix = {
+    enable = true;
+    settings = {
+      experimental-features = "nix-command flakes";
+      trusted-users = [
+        "root"
+        "kevin"
+      ];
+    };
   };
 
   # Hostname
@@ -33,9 +36,6 @@
     vim
     git
   ];
-
-  # Enable nix-daemon
-  services.nix-daemon.enable = true;
 
   # Enable zsh
   programs.zsh.enable = true;
