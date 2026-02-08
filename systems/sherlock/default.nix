@@ -54,12 +54,14 @@
   # --- Programs ---
   programs = {
     firefox.enable = true;
-    thunar.enable = true;
-    hyprland = {
-      enable = true;
-      withUWSM = false;
-      xwayland.enable = false;
-    };
+    niri.enable = true;
+    hyprland.enable = false;
+    # thunar.enable = true;
+    # hyprland = {
+    #   enable = true;
+    #   withUWSM = false;
+    #   xwayland.enable = false;
+    # };
   };
 
   # --- Security settings ---
@@ -78,18 +80,18 @@
     handbrake
 
     # Hyprland related packages
-    kitty
-    brightnessctl
-    hypridle
-    hyprlock
-    hyprpaper
-    libnotify
-    mako
-    networkmanagerapplet
-    pavucontrol
-    waybar
-    wlogout
-    wofi
+    # kitty
+    # brightnessctl
+    # hypridle
+    # hyprlock
+    # hyprpaper
+    # libnotify
+    # mako
+    # networkmanagerapplet
+    # pavucontrol
+    # waybar
+    # wlogout
+    # wofi
   ];
 
   # --- Wayland environment settings ---

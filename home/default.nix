@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   ...
@@ -12,9 +11,11 @@
     ./programs/starship
     ./programs/kitty
     ./programs/nixvim
-    ./programs/wofi
-    ./programs/ashell
-    ./programs/hyprland
+    ./programs/dms
+    ./programs/niri
+    # ./programs/wofi
+    # ./programs/ashell
+    # ./programs/hyprland
   ];
 
   # Theme options used by multiple programs

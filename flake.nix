@@ -16,6 +16,10 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +52,7 @@
               extraSpecialArgs = { inherit inputs hostName; };
               users.kevin.imports = [
                 inputs.nixvim.homeModules.nixvim
+                inputs.dms.homeModules.dank-material-shell
                 ./home
               ];
             };
