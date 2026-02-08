@@ -1,13 +1,12 @@
+{ hostName, ... }:
 {
-  pkgs,
-  hostName,
-  ...
-}:
-{
-  # System state version
+  imports = [
+    ./preferences.nix
+    ./packages.nix
+  ];
+
   system.stateVersion = 6;
 
-  # Nix settings
   nix = {
     enable = true;
     settings = {
@@ -19,24 +18,13 @@
     };
   };
 
-  # Hostname
   networking = {
     hostName = hostName;
     computerName = hostName;
   };
 
-  # User
   users.users.kevin = {
     name = "kevin";
     home = "/Users/kevin";
   };
-
-  # Basic packages
-  environment.systemPackages = with pkgs; [
-    vim
-    git
-  ];
-
-  # Enable zsh
-  programs.zsh.enable = true;
 }
