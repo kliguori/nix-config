@@ -27,4 +27,6 @@
     name = "kevin";
     home = "/Users/kevin";
   };
+
+  system.primaryUser = "kevin";
 }
