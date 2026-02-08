@@ -1,6 +1,6 @@
 { ... }:
 {
-  programs.dms-shell = {
+  programs.dank-material-shell = {
     enable = true;
 
     enableClipboard = true;
