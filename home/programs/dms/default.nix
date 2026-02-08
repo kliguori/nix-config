@@ -14,7 +14,5 @@
     enableBrightness = true;
     enablePolkit = true;
     enableIdleInhibit = true;
-
-    defaultSession = "niri";
   };
 }
