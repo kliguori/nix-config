@@ -55,6 +55,7 @@
   programs = {
     firefox.enable = true;
     niri.enable = true;
+    thunar.enable = true;
     hyprland.enable = false;
     # thunar.enable = true;
     # hyprland = {

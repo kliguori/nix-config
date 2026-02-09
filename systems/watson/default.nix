@@ -55,7 +55,7 @@
     firefox.enable = true;
     thunar.enable = true;
     hyprland = {
-      enable = true;
+      enable = false;
       withUWSM = false;
       xwayland.enable = false;
     };
@@ -65,21 +65,9 @@
   security.pam.services.hyprlock = { }; # For hyprlock to work
 
   # --- Packages ---
-  environment.systemPackages = with pkgs; [
-    # Hyprland related packages
-    kitty
-    brightnessctl
-    hypridle
-    hyprlock
-    hyprpaper
-    libnotify
-    mako
-    networkmanagerapplet
-    pavucontrol
-    waybar
-    wlogout
-    wofi
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   
+  # ];
 
   # --- Wayland environment settings ---
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
