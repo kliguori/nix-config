@@ -94,7 +94,7 @@
       stateVersion = "25.11";
 
       packages = with pkgs; [
-        brave
+        signal-dekstop
         spotify
         nerd-fonts.jetbrains-mono
 
