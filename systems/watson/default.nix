@@ -28,6 +28,9 @@
     supportedFilesystems = [ "btrfs" ];
   };
 
+  # --- Hardware ---
+  hardware.enableAllFirmware = true;
+
   # --- System options ---
   systemOptions = {
     impermanence.enable = true;
