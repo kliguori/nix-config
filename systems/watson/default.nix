@@ -26,7 +26,6 @@
       efi.canTouchEfiVariables = true;
     };
     supportedFilesystems = [ "btrfs" ];
-    resumeDevice = "/dev/mapper/vg-swap";
   };
 
   # --- System options ---
