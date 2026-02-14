@@ -6,7 +6,7 @@
   ...
 }:
 let
-  isWatson = hostName == "watson";
+  isLestrade = hostName == "lestrade";
 in
 {
   services.xserver = {
@@ -21,7 +21,7 @@ in
       open = false;
       nvidiaSettings = true;
       package = config.boot.kernelPackages.nvidiaPackages.stable;
-      prime = lib.mkIf isWatson {
+      prime = lib.mkIf isLestrade {
         offload = {
           enable = true;
           enableOffloadCmd = true;
@@ -30,7 +30,7 @@ in
         nvidiaBusId = "PCI:1:0:0";
       };
 
-      powerManagement = lib.mkIf isWatson {
+      powerManagement = lib.mkIf isLestrade {
         enable = true;
         finegrained = true;
       };
