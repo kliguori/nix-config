@@ -1,0 +1,47 @@
+{ config, lib, ... }:
+let
+  cfg = config.systemOptions.impermanence;
+in
+{
+  options.systemOptions.impermanence = {
+    enable = lib.mkEnableOption "Impermanent root with persistence under /persist";
+
+    rootTmpfsSize = lib.mkOption {
+      type = lib.types.str;
+      default = "8G";
+      description = "Optional tmpfs size";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    fileSystems = {
+      "/" = {
+        device = "tmpfs";
+        fsType = "tmpfs";
+        options = [
+          "mode=0755"
+          "size=${cfg.rootTmpfsSize}"
+        ];
+      };
+      "/nix".neededForBoot = true;
+      "/persist".neededForBoot = true;
+    };
+
+    environment.persistence."/persist" = {
+      hideMounts = true;
+      directories = [
+        "/var/log"
+        "/var/lib/nixos"
+        "/var/lib/systemd"
+        "/var/lib/NetworkManager"
+      ];
+
+      files = [
+        "/etc/machine-id"
+      ];
+    };
+
+    # Required for impermanence
+    programs.fuse.userAllowOther = true;
+  };
+}

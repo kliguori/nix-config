@@ -4,10 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
-    nix-darwin = {
-      url = "github:nix-darwin/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    impermanence.url = "github:nix-community/impermanence";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,34 +13,24 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    impermanence.url = "github:nix-community/impermanence";
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nix-darwin,
-      ...
-    }:
+  outputs = inputs@{ self, nixpkgs, ... }:
     let
-      mkSystem =
-        hostName: system:
+      mkSystem = hostName: system:
         let
-          isDarwin = nixpkgs.lib.hasSuffix "-darwin" system;
-
           homeManagerModule = {
             home-manager = {
               useUserPackages = true;
@@ -61,29 +48,19 @@
           diskoModule = {
             disko.devices = import ./systems/${hostName}/disko.nix;
           };
-
-          platformModules =
-            if isDarwin then
-              [
-                inputs.home-manager.darwinModules.home-manager
-              ]
-            else
-              [
-                inputs.impermanence.nixosModules.impermanence
-                inputs.home-manager.nixosModules.home-manager
-                inputs.agenix.nixosModules.default
-                inputs.disko.nixosModules.disko
-                diskoModule
-              ];
         in
-        (if isDarwin then nix-darwin.lib.darwinSystem else nixpkgs.lib.nixosSystem) {
+        nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit inputs hostName; };
-          modules = platformModules ++ [
-            ./systems/${hostName}
-          ] ++ (if isDarwin then [ ] else [
+          modules = [
+            inputs.impermanence.nixosModules.impermanence
+            inputs.home-manager.nixosModules.home-manager
+            inputs.agenix.nixosModules.default
+            inputs.disko.nixosModules.disko
             homeManagerModule
-          ]);
+            diskoModule
+            ./systems/${hostName}
+          ];
         };
     in
     {
@@ -94,11 +71,9 @@
 
       nixosConfigurations = {
         sherlock = mkSystem "sherlock" "x86_64-linux";
+        watson = mkSystem "watson" "x86_64-linux";
         lestrade = mkSystem "lestrade" "x86_64-linux";
       };
 
-      darwinConfigurations = {
-        macbook = mkSystem "macbook" "aarch64-darwin";
-      };
     };
 }
