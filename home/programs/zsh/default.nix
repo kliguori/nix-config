@@ -32,6 +32,7 @@
       gp = "git push";
       gl = "git pull";
       gd = "git diff";
+      gco = "git checkout";
 
       # neovim
       vi = "nvim";
