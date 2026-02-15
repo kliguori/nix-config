@@ -12,6 +12,10 @@ in
       niri.enable = true;
       thunar.enable = true;
       firefox.enable = true; 
+      dank-material-shell.greeter = {
+        enable = true;
+        compositor.name = "niri";
+      };
     };
 
     environment = {

@@ -27,9 +27,11 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, ... }:
+  outputs =
+    inputs@{ self, nixpkgs, ... }:
     let
-      mkSystem = hostName: system:
+      mkSystem =
+        hostName: system:
         let
           homeManagerModule = {
             home-manager = {
@@ -55,6 +57,7 @@
           modules = [
             inputs.impermanence.nixosModules.impermanence
             inputs.home-manager.nixosModules.home-manager
+            inputs.dms.nixosModules.greeter
             inputs.agenix.nixosModules.default
             inputs.disko.nixosModules.disko
             homeManagerModule

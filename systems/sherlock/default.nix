@@ -20,6 +20,7 @@
     ../modules/nvidia.nix
     ../modules/persistence.nix
     ../../users
+    ../../modules
   ];
 
   # --- State version ---
@@ -51,26 +52,19 @@
     };
   };
 
-  # --- Programs ---
-  programs = {
-    firefox.enable = true;
-    niri.enable = true;
-    thunar.enable = true;
-    hyprland.enable = false;
-    # thunar.enable = true;
-    # hyprland = {
-    #   enable = true;
-    #   withUWSM = false;
-    #   xwayland.enable = false;
+  # --- System options ---
+  systemOptions = {
+    # impermanence.enable = true;
+    desktop.enable = true;    
+    # services = {
+    #   ssh.enable = true;
+    #   fstrim.enable = true;
+    #   tailscale.enable = true;
     # };
   };
 
-  # --- Security settings ---
-  security.pam.services.hyprlock = { }; # For hyprlock to work
-
   # --- Packages ---
   environment.systemPackages = with pkgs; [
-    # Virtualisation
     libvirt
     virt-manager
     virt-viewer
@@ -79,22 +73,5 @@
     # Transcoding
     makemkv
     handbrake
-
-    # Hyprland related packages
-    # kitty
-    # brightnessctl
-    # hypridle
-    # hyprlock
-    # hyprpaper
-    # libnotify
-    # mako
-    # networkmanagerapplet
-    # pavucontrol
-    # waybar
-    # wlogout
-    # wofi
   ];
-
-  # --- Wayland environment settings ---
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
