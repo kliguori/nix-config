@@ -1,1 +1,10 @@
-Write me
+# To do:
+1. Get dms running on login
+2. Manage niri keybinds and features with dms in home manager
+3. Or manage dms with niri config in home manager
+4. Finish making sherlock config dendritic, re-evaluate disk configs and impermanence model
+5. Remove all traces of darwin from home manager configs
+6. Re-evaluate terminal choice
+7. Vim motions in terminal
+8. Firefox config including ad blocking
+9. and so on... 
