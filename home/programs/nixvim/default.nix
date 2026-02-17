@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ unstablePkgs, ... }:
 {
   imports = [
     ./options.nix
@@ -9,6 +9,7 @@
 
   programs.nixvim = {
     enable = true;
+    package = unstablePkgs.neovim;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
