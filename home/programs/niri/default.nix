@@ -74,7 +74,7 @@
       // Core actions
       Alt+Q repeat=false { close-window; }
       Alt+O repeat=false { toggle-overview; }
-      Alt+? { show-hotkey-overlay; }
+      Alt+Slash { show-hotkey-overlay; }
     
       // Focus 
       Alt+H { focus-column-left; }
