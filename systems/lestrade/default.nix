@@ -1,74 +1,46 @@
-{
-  config,
-  lib,
-  pkgs,
-  modulesPath,
-  inputs,
-  ...
-}:
+{ inputs, hostName, lib, ... }:
 {
   # --- Imports ---
   imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-    inputs.nixos-hardware.nixosModules.common-cpu-intel
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-laptop
-    ./boot.nix
-    ./networking.nix
-    ./filesystems.nix
-    ../modules/common.nix
-    ../modules/nvidia.nix
-    ../modules/persistence.nix
+    ../core 
+    ../../modules 
     ../../users
   ];
 
   # --- State version ---
   system.stateVersion = "25.11";
 
-  # --- Services ---
-  services = {
-    blueman.enable = false; # Disable Blueman service
-    pulseaudio.enable = false; # Disable pulseaudio
-    zfs.autoScrub.enable = true; # Enable automatic scrubbing of ZFS pools
-    tailscale.enable = true; # Enable  tailscale
-
-    # Enable pipewire
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
-
-    # Enable SSH
-    openssh = {
-      enable = true;
-      settings = {
-        PermitRootLogin = "no";
-        PasswordAuthentication = false;
-      };
-    };
+  # --- Networking ---
+  networking = {
+    hostName = hostName;
+    hostId = "5dcafb0a";
+    useDHCP = lib.mkDefault true;
+    networkmanager.enable = true;
   };
 
-  # --- Programs ---
-  programs = {
-    firefox.enable = true;
-    thunar.enable = true;
-    hyprland = {
-      enable = false;
-      withUWSM = false;
-      xwayland.enable = false;
+  # --- Boot settings ---
+  boot = {
+    kernelParams = [ ];
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
+    supportedFilesystems = [ "btrfs" ];
   };
 
-  # --- Security settings ---
-  security.pam.services.hyprlock = { }; # For hyprlock to work
+  # --- Hardware ---
+  hardware.enableAllFirmware = true;
 
-  # --- Packages ---
-  # environment.systemPackages = with pkgs; [
-  #   
-  # ];
-
-  # --- Wayland environment settings ---
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  # --- System options ---
+  systemOptions = {
+    impermanence.enable = true;
+    desktop.enable = true;    
+    services = {
+      ssh.enable = true;
+      fstrim.enable = true;
+      tailscale.enable = true;
+    };
+  };
 }
