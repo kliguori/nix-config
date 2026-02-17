@@ -1,6 +1,6 @@
 # To do:
-~~1. Get dms running on login ~~
-~~2. Simplify niri config/keybinds ~~
+<s>1. Get dms running on login</s>
+2. Simplify niri config/keybinds 
 3. DMS config 
 4. Finish making sherlock config dendritic, re-evaluate disk configs and impermanence model
 5. Remove all traces of darwin from home manager configs
