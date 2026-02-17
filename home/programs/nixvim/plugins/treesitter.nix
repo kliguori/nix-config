@@ -9,6 +9,7 @@
     grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
       nix
       python
+      rust
       julia
       c
       lua
@@ -18,6 +19,7 @@
       markdown
       markdown_inline
       toml
+      kdl
     ];
   };
 }
