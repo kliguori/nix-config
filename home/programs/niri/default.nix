@@ -3,9 +3,6 @@
   home.file.".config/niri/config.kdl".text = ''
     // ~/.config/niri/config.kdl
    
-    // Start DMS at startup
-    // spawn-at-startup "dms" "run"
-
     // No client decorations
     prefer-no-csd
 
