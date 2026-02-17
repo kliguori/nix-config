@@ -9,7 +9,7 @@
 
   programs.nixvim = {
     enable = true;
-    package = unstablePkgs.neovim;
+    package = unstablePkgs.neovim-unwrapped;
     viAlias = true;
     vimAlias = true;
     defaultEditor = true;
