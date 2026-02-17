@@ -1,7 +1,7 @@
 # To do:
-1. Get dms running on login
-2. Manage niri keybinds and features with dms in home manager
-3. Or manage dms with niri config in home manager
+~~1. Get dms running on login ~~
+~~2. Simplify niri config/keybinds ~~
+3. DMS config 
 4. Finish making sherlock config dendritic, re-evaluate disk configs and impermanence model
 5. Remove all traces of darwin from home manager configs
 6. Re-evaluate terminal choice
