@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  unstablePkgs,
   ...
 }:
 {
@@ -96,6 +97,9 @@
       packages = with pkgs; [
         signal-desktop
         spotify
+        unstablePkgs.claude-code
+
+        # Fonts
         nerd-fonts.jetbrains-mono
 
         # Language servers and formatters
