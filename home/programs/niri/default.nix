@@ -63,13 +63,18 @@
       geometry-corner-radius 8
       clip-to-geometry true
     }
-   
+
+    // Recent windows
+    recent-windows {
+      modifier Alt
+    }
+
     // Keybinds
     binds {
       // Core apps
       Alt+Return { spawn "kitty"; }
       Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
-      Alt+Shift+L { spawn "dms" "ipc" "call" "lock" "lock"; }
+      Super+L { spawn "dms" "ipc" "call" "lock" "lock"; }
     
       // Core actions
       Alt+Q repeat=false { close-window; }
