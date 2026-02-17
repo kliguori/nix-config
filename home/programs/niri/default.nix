@@ -14,8 +14,15 @@
 
     // Inputs
     input {
-      keyboard { numlock }
-      touchpad { tap natural-scroll }
+      keyboard { 
+        numlock
+      }
+
+      touchpad { 
+        tap
+        natural-scroll
+      }
+
       focus-follows-mouse max-scroll-amount="0%"
     }
     
@@ -55,39 +62,39 @@
    
     // Keybinds
     binds {
-      # Core apps
+      // Core apps
       Alt+Return { spawn "kitty"; }
       Alt+D { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
       Alt+Shift+L { spawn "dms" "ipc" "call" "lock" "lock"; }
     
-      # Core actions
+      // Core actions
       Alt+Q repeat=false { close-window; }
       Alt+O repeat=false { toggle-overview; }
       Alt+? { show-hotkey-overlay; }
     
-      # Focus (home row)
+      // Focus 
       Alt+H { focus-column-left; }
       Alt+J { focus-window-or-workspace-down; }
       Alt+K { focus-window-or-workspace-up; }
       Alt+L { focus-column-right; }
     
-      # Move (Alt+Space = grab)
+      // Move (Alt+Space = grab)
       Alt+Space+H { move-column-left; }
       Alt+Space+J { move-window-down-or-to-workspace-down; }
       Alt+Space+K { move-window-up-or-to-workspace-up; }
       Alt+Space+L { move-column-right; }
 
-      # Recent windows (Alt+Tab)
+      // Recent windows (Alt+Tab)
       Alt+Tab repeat=true { focus-recent-window; }
       Alt+Shift+Tab repeat=true { focus-recent-window-backward; }
     
-      # Workspaces (flow)
+      // Workspaces 
       Alt+U { focus-workspace-down; }
       Alt+I { focus-workspace-up; }
       Alt+Space+U { move-column-to-workspace-down; }
       Alt+Space+I { move-column-to-workspace-up; }
     
-      # Workspaces (teleport)
+      // Workspaces 
       Alt+1 { focus-workspace 1; }
       Alt+2 { focus-workspace 2; }
       Alt+3 { focus-workspace 3; }
@@ -108,25 +115,25 @@
       Alt+Space+8 { move-column-to-workspace 8; }
       Alt+Space+9 { move-column-to-workspace 9; }
     
-      # Monitors (Ctrl = global)
+      // Monitors (Ctrl = global)
       Ctrl+H { focus-monitor-left; }
       Ctrl+L { focus-monitor-right; }
       Ctrl+Space+H { move-column-to-monitor-left; }
       Ctrl+Space+L { move-column-to-monitor-right; }
     
-      # Layout / state 
+      // Layout / state 
       Alt+R { switch-preset-column-width; }
       Alt+F { maximize-column; }
       Alt+Shift+F { fullscreen-window; }
       Alt+V { toggle-window-floating; }
       Alt+C { center-column; }
     
-      # Screenshots
+      // Screenshots
       Print { screenshot; }
       Ctrl+Print { screenshot-screen; }
       Alt+Print { screenshot-window; }
     
-      # Audio 
+      // Audio 
       XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
       XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
       XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
@@ -137,11 +144,11 @@
       XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
       XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
     
-      # Brightness 
+      // Brightness 
       XF86MonBrightnessUp   allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "increment" "5"; }
       XF86MonBrightnessDown allow-when-locked=true { spawn "dms" "ipc" "call" "brightness" "decrement" "5"; }
     
-      # Safety / misc
+      // Safety / misc
       Alt+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
       Alt+Shift+P { power-off-monitors; }   
       Ctrl+Alt+Delete { quit; }
