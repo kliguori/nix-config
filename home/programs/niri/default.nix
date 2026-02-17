@@ -38,7 +38,9 @@
     layout {
       gaps 8
       center-focused-column "never"
-      default-column-width { proportion 0.5 }
+      default-column-width { 
+        proportion 0.5 
+      }
     
       focus-ring {
         width 4
@@ -46,7 +48,9 @@
         inactive-color "#505050"
       }
     
-      border { off }
+      border { 
+        off 
+      }
     }
    
    // Window rules
