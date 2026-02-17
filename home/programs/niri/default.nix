@@ -68,7 +68,7 @@
     binds {
       // Core apps
       Alt+Return { spawn "kitty"; }
-      Alt+D { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+      Alt+Space { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
       Alt+Shift+L { spawn "dms" "ipc" "call" "lock" "lock"; }
     
       // Core actions
@@ -83,10 +83,10 @@
       Alt+L { focus-column-right; }
     
       // Move (Alt+Space = grab)
-      Alt+Space+H { move-column-left; }
-      Alt+Space+J { move-window-down-or-to-workspace-down; }
-      Alt+Space+K { move-window-up-or-to-workspace-up; }
-      Alt+Space+L { move-column-right; }
+      Alt+Shift+H { move-column-left; }
+      Alt+Shift+J { move-window-down-or-to-workspace-down; }
+      Alt+Shift+K { move-window-up-or-to-workspace-up; }
+      Alt+Shift+L { move-column-right; }
 
       // Recent windows (Alt+Tab)
       Alt+Tab repeat=true { focus-recent-window; }
@@ -95,8 +95,8 @@
       // Workspaces 
       Alt+U { focus-workspace-down; }
       Alt+I { focus-workspace-up; }
-      Alt+Space+U { move-column-to-workspace-down; }
-      Alt+Space+I { move-column-to-workspace-up; }
+      Alt+Shift+U { move-column-to-workspace-down; }
+      Alt+Shift+I { move-column-to-workspace-up; }
     
       // Workspaces 
       Alt+1 { focus-workspace 1; }
@@ -109,21 +109,21 @@
       Alt+8 { focus-workspace 8; }
       Alt+9 { focus-workspace 9; }
     
-      Alt+Space+1 { move-column-to-workspace 1; }
-      Alt+Space+2 { move-column-to-workspace 2; }
-      Alt+Space+3 { move-column-to-workspace 3; }
-      Alt+Space+4 { move-column-to-workspace 4; }
-      Alt+Space+5 { move-column-to-workspace 5; }
-      Alt+Space+6 { move-column-to-workspace 6; }
-      Alt+Space+7 { move-column-to-workspace 7; }
-      Alt+Space+8 { move-column-to-workspace 8; }
-      Alt+Space+9 { move-column-to-workspace 9; }
+      Alt+Shift+1 { move-column-to-workspace 1; }
+      Alt+Shift+2 { move-column-to-workspace 2; }
+      Alt+Shift+3 { move-column-to-workspace 3; }
+      Alt+Shift+4 { move-column-to-workspace 4; }
+      Alt+Shift+5 { move-column-to-workspace 5; }
+      Alt+Shift+6 { move-column-to-workspace 6; }
+      Alt+Shift+7 { move-column-to-workspace 7; }
+      Alt+Shift+8 { move-column-to-workspace 8; }
+      Alt+Shift+9 { move-column-to-workspace 9; }
     
       // Monitors (Ctrl = global)
       Ctrl+H { focus-monitor-left; }
       Ctrl+L { focus-monitor-right; }
-      Ctrl+Space+H { move-column-to-monitor-left; }
-      Ctrl+Space+L { move-column-to-monitor-right; }
+      Ctrl+Shift+H { move-column-to-monitor-left; }
+      Ctrl+Shift+L { move-column-to-monitor-right; }
     
       // Layout / state 
       Alt+R { switch-preset-column-width; }
