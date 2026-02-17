@@ -6,13 +6,13 @@
       mode = "n";
       key = "<leader>e";
       action = "<cmd>Neotree filesystem toggle left<CR>";
-      option.desc = "Explorer: Neo-tree toggle";
+      options.desc = "Explorer: Neo-tree toggle";
     }
     {
       mode = "n";
       key = "<leader>er";
       action = "<cmd>Neotree filesystem reveal left<CR>";
-      option.desc = "Explorer: Reveal file in tree";
+      options.desc = "Explorer: Reveal file in tree";
     }
 
     # Buffer navigation
