@@ -66,7 +66,7 @@
 
     // Recent windows
     recent-windows {
-      modifier Alt
+      modifier "Alt"
     }
 
     // Keybinds
@@ -93,10 +93,6 @@
       Alt+Shift+K { move-window-up-or-to-workspace-up; }
       Alt+Shift+L { move-column-right; }
 
-      // Recent windows (Alt+Tab)
-      Alt+Tab repeat=true { focus-recent-window; }
-      Alt+Shift+Tab repeat=true { focus-recent-window-backward; }
-    
       // Workspaces 
       Alt+U { focus-workspace-down; }
       Alt+I { focus-workspace-up; }
