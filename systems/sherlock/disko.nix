@@ -56,25 +56,6 @@
       };
     };
 
-    # Data storage drive with dpool
-    dataShare = {
-      type = "disk";
-      device = "/dev/disk/by-id/nvme-Samsung_SSD_990_EVO_Plus_4TB_S7U8NJ0Y622750V";
-      content = {
-        type = "gpt";
-        partitions = {
-          dpool = {
-            name = "dpool";
-            size = "100%";
-            content = {
-              type = "zfs";
-              pool = "dpool";
-            };
-          };
-        };
-      };
-    };
-
     # Hard drive with spool
     hdd1t = {
       type = "disk";
@@ -153,38 +134,6 @@
       };
       datasets = {
         home = {
-          type = "zfs_fs";
-          options = {
-            canmount = "noauto";
-            mountpoint = "legacy";
-          };
-        };
-      };
-    };
-
-    # Data pool
-    dpool = {
-      type = "zpool";
-      options = {
-        ashift = "12";
-        autotrim = "on";
-      };
-      rootFsOptions = {
-        mountpoint = "none";
-        compression = "zstd";
-        atime = "off";
-        xattr = "sa";
-        acltype = "posixacl";
-      };
-      datasets = {
-        media = {
-          type = "zfs_fs";
-          options = {
-            canmount = "noauto";
-            mountpoint = "legacy";
-          };
-        };
-        share = {
           type = "zfs_fs";
           options = {
             canmount = "noauto";

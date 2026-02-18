@@ -1,5 +1,6 @@
 {
   disk = {
+    # device = "/dev/disk/by-id/nvme-Samsung_SSD_990_EVO_Plus_4TB_S7U8NJ0Y622750V";
     # System drive
     system = {
       type = "disk";
