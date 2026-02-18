@@ -33,7 +33,7 @@ in
         "/var/log"
         "/var/lib/nixos"
         "/var/lib/systemd"
-        "/var/lib/NetworkManager"
+        "/etc/NetworkManager/system-connections"
       ];
 
       files = [
