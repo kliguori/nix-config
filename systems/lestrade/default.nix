@@ -37,7 +37,10 @@
   systemOptions = {
     impermanence.enable = true;
     desktop.enable = true;
-    hibernate.enable = true;
+    hibernate = {
+      enable = true;
+      resumeDevice = "/dev/vg/swap";
+    };
     services = {
       ssh.enable = true;
       fstrim.enable = true;
