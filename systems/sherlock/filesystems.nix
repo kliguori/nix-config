@@ -25,18 +25,6 @@
       neededForBoot = true;
     };
 
-    "/srv/media" = {
-      device = "dpool/media";
-      fsType = "zfs";
-      options = [ "nofail" ];
-    };
-
-    "/srv/share" = {
-      device = "dpool/share";
-      fsType = "zfs";
-      options = [ "nofail" ];
-    };
-
     "/scratch" = {
       device = "spool/scratch";
       fsType = "zfs";
