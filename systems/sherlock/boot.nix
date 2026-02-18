@@ -44,7 +44,6 @@
       postDeviceCommands = lib.mkAfter ''
         zpool import -N -f rpool
         zpool import -N -f hpool 
-        zpool import -N -f dpool
         zpool import -N -f spool
         zfs rollback -r rpool/root@blank
       '';

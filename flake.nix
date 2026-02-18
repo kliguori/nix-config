@@ -49,7 +49,7 @@
               useUserPackages = true;
               useGlobalPkgs = true;
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs hostName unstablePkgs; };
+              extraSpecialArgs = { inherit inputs hostName; };
               users.kevin.imports = [
                 inputs.nixvim.homeModules.nixvim
                 inputs.dms.homeModules.dank-material-shell
@@ -73,6 +73,7 @@
             inputs.disko.nixosModules.disko
             homeManagerModule
             diskoModule
+            ./overlays
             ./systems/${hostName}
           ];
         };
