@@ -17,7 +17,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    boot.kernelParams = [ "resume=${cfg.resumeDevice}" ];
+    boot.kernelParams = [ 
+      "resume=${cfg.resumeDevice}"
+      "hibernate.mode=shutdown"
+    ];
     systemd.sleep.extraConfig = ''
       AllowSuspend=yes
       AllowHibernation=yes
