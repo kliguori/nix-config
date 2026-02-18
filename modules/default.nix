@@ -5,5 +5,6 @@
     ./desktop
     ./programs
     ./services
+    ./hibernate
   ];
 }

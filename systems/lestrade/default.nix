@@ -36,7 +36,8 @@
   # --- System options ---
   systemOptions = {
     impermanence.enable = true;
-    desktop.enable = true;    
+    desktop.enable = true;
+    hibernate.enable = true;
     services = {
       ssh.enable = true;
       fstrim.enable = true;
