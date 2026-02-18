@@ -27,6 +27,10 @@ in
     tailscale = {
       enable = lib.mkEnableOption "Tailscale VPN client";
     };
+
+    powerManagement = {
+      enable = lib.mkEnableOption "UPower and power-profiles-daemon for battery/power management (laptops)";
+    };
   };
 
   config = lib.mkMerge [
@@ -53,6 +57,12 @@ in
       services.tailscale.enable = true;
       environment.persistence."/persist".directories =
         lib.mkIf config.systemOptions.impermanence.enable [ "/var/lib/tailscale" ];
+    })
+
+    # --- Power Management (laptops) ---
+    (lib.mkIf cfg.powerManagement.enable {
+      services.upower.enable = true;
+      services.power-profiles-daemon.enable = true;
     })
   ];
 }

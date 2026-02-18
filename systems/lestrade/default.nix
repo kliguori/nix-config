@@ -41,6 +41,7 @@
       ssh.enable = true;
       fstrim.enable = true;
       tailscale.enable = true;
+      powerManagement.enable = true;
     };
   };
 }
