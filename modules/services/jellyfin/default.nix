@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.systemOptions.services.jellyfin;
+  rpEnabled = config.systemOptions.services.reverseProxy.enable or false;
 in
 {
   options.systemOptions.services.jellyfin = {
@@ -8,29 +9,50 @@ in
 
     openFirewall = lib.mkOption {
       type = lib.types.bool;
-      default = true;
-      description = "Open firewall ports for Jellyfin";
+      default = false;
+      description = "Open Jellyfin ports directly (8096/8920). Prefer reverse proxy.";
     };
 
-    mediaDir = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Path to the media library";
+    enableDiscovery = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Open UDP discovery ports (1900, 7359). Typically LAN-only.";
     };
   };
 
   config = lib.mkIf cfg.enable {
     services.jellyfin.enable = true;
 
-    networking.firewall = lib.mkIf cfg.openFirewall {
-      allowedTCPPorts = [ 8096 8920 ];
-      allowedUDPPorts = [ 1900 7359 ];
-    };
+    networking.firewall.allowedTCPPorts = lib.mkIf cfg.openFirewall [
+      8096
+      8920
+    ];
+    networking.firewall.allowedUDPPorts = lib.mkIf cfg.enableDiscovery [
+      1900
+      7359
+    ];
 
-    environment.persistence."/persist".directories =
-      lib.mkIf config.systemOptions.impermanence.enable [
-        "/var/lib/jellyfin"
-        "/var/cache/jellyfin"
-      ];
+    warnings =
+      lib.optional (rpEnabled && cfg.openFirewall)
+        "jellyfin.openFirewall = true while reverseProxy is enabled; this exposes Jellyfin directly.";
+
+    services.nginx.virtualHosts = lib.mkIf rpEnabled (
+      let
+        rp = config.systemOptions.services.reverseProxy;
+        tls = rp.enableTLS or false;
+        vhostName = "jellyfin.${rp.baseDomain}";
+      in
+      {
+        ${vhostName} = {
+          enableACME = tls;
+          forceSSL = tls;
+
+          locations."/" = {
+            proxyPass = "http://127.0.0.1:8096";
+            proxyWebsockets = true;
+          };
+        };
+      }
+    );
   };
 }

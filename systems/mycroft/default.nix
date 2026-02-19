@@ -33,6 +33,8 @@
     };
     services = {
       powerManagement.enable = true;
+      reverseProxy.enable = true;
+      jellyfin.enable = true;
       # paperless = {
       #   dataDir = "/data/paperless";
       #   consumptionDir = "/data/paperless/consume";

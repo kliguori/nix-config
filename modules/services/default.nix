@@ -5,9 +5,9 @@
     ./fstrim
     ./tailscale
     ./powerManagement
-    # ./reverseProxy
+    ./reverseProxy
     # ./vaultwarden
-    # ./jellyfin
+    ./jellyfin
     # ./paperless
     # ./postgreSQL
   ];
