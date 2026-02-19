@@ -6,7 +6,8 @@ in
   options.systemOptions.hibernate = {
     enable = lib.mkEnableOption "Hibernate and suspend support";
     resumeDevice = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
+      default = null;
       description = "Path to the swap device to use for hibernation";
     };
     delaySec = lib.mkOption {
@@ -16,7 +17,7 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf (cfg.enable && cfg.resumeDevice != null) {
     boot.kernelParams = [ "resume=${cfg.resumeDevice}" ];
     systemd.sleep.extraConfig = ''
       AllowSuspend=yes
