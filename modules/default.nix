@@ -6,5 +6,6 @@
     ./programs
     ./services
     ./hibernate
+    ./nvidia
   ];
 }

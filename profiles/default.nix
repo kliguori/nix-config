@@ -41,7 +41,7 @@
     };
 
     # --- Immuatable users ---
-    users.mutableUsers = false;
+    users.mutableUsers = lib.mkForce false;
 
     # --- Networking ---
     networking = {
