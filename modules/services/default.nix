@@ -9,6 +9,6 @@
     # ./vaultwarden
     # ./jellyfin
     # ./paperless
-    ./postgreSQL
+    # ./postgreSQL
   ];
 }
