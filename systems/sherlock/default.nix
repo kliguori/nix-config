@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   modulesPath,
   inputs,
@@ -16,9 +14,9 @@
     ./boot.nix
     ./filesystems.nix
     ./networking.nix
-    ../modules/common.nix
-    ../modules/nvidia.nix
-    ../modules/persistence.nix
+    ./common.nix
+    ./nvidia.nix
+    ./persistence.nix
     ../../users
     ../../modules
   ];
