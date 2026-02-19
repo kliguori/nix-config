@@ -7,15 +7,16 @@ in
     enable = lib.mkEnableOption "PostgreSQL database server";
 
     dataDir = lib.mkOption {
-      type = lib.types.str;
-      description = "Directory to store PostgreSQL data. Must be on a persistent drive.";
+      type = lib.types.path;
+      default = "/var/lib/postgresql";
+      description = "Directory to store PostgreSQL data (must be persistent).";
     };
   };
 
   config = lib.mkIf cfg.enable {
     services.postgresql = {
       enable = true;
-      dataDir = cfg.dataDir;
+      dataDir = toString cfg.dataDir;
     };
   };
 }

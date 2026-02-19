@@ -32,10 +32,10 @@
     };
     services = {
       powerManagement.enable = true;
-      paperless = {
-        dataDir = "/data/paperless";
-        consumptionDir = "/data/paperless/consume";
-      };
+      # paperless = {
+      #   dataDir = "/data/paperless";
+      #   consumptionDir = "/data/paperless/consume";
+      # };
       postgresql.dataDir = "/data/postgresql";
     };
   };

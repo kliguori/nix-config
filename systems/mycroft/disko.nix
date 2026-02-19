@@ -77,80 +77,8 @@
                       "noatime"
                     ];
                   };
-                  "@music" = {
-                    mountpoint = "/media/music";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@audiobooks" = {
-                    mountpoint = "/media/audiobooks";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@books" = {
-                    mountpoint = "/media/books";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@games" = {
-                    mountpoint = "/media/games";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-
-                  # --- Shares ---
-                  "@shares-kevin" = {
-                    mountpoint = "/shares/kevin";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@shares-jane" = {
-                    mountpoint = "/shares/jane";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
 
                   # --- Service data ---
-                  "@paperless" = {
-                    mountpoint = "/data/paperless";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@consume-kevin" = {
-                    mountpoint = "/data/paperless/consume/kevin";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@consume-jane" = {
-                    mountpoint = "/data/paperless/consume/jane";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
-                  "@consume-household" = {
-                    mountpoint = "/data/paperless/consume/household";
-                    mountOptions = [
-                      "compress=zstd"
-                      "noatime"
-                    ];
-                  };
                   "@postgresql" = {
                     mountpoint = "/data/postgresql";
                     mountOptions = [
