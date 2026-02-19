@@ -37,7 +37,7 @@
       #   dataDir = "/data/paperless";
       #   consumptionDir = "/data/paperless/consume";
       # };
-      postgresql.dataDir = "/data/postgresql";
+      # postgresql.dataDir = "/data/postgresql";
     };
   };
 }
