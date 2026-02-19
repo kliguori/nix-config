@@ -5,7 +5,7 @@ in
 {
   config = lib.mkIf (cfg.systemType == "laptop") {
     systemOptions = {
-      powerManagement.enable = lib.mkDefault true;
+      services.powerManagement.enable = lib.mkDefault true;
     };
   };
 }
