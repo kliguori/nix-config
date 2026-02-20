@@ -101,6 +101,8 @@
       usbutils
       lm_sensors
       fwupd
+      sops
+      age
     ];
   };
 }
