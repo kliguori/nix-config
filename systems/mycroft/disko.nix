@@ -86,6 +86,13 @@
                       "noatime"
                     ];
                   };
+                  "@vaultwarden" = {
+                    mountpoint = "/data/vaultwarden";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
                 };
               };
             };
