@@ -35,7 +35,7 @@ in
       }
     ];
 
-    services.xserver.videoDrivers = [ "nvidia" ];
+    services.xserver.videoDrivers = [ "modesetting" "nvidia" ];
 
     hardware = {
       graphics.enable = true;
