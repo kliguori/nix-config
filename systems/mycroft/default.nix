@@ -1,4 +1,4 @@
-{ inputs, hostName, ... }:
+{ inputs, hostName, pkgs, ... }:
 {
   # --- Imports ---
   imports = [
@@ -21,6 +21,19 @@
   # --- Force Wayland to use Intel GPU ---
   environment.sessionVariables = {
     WLR_DRM_DEVICES = "/dev/dri/card1"; # card1 is intel card0 nvidia
+  };
+
+  # --- Set profile to "cool" ---
+  systemd.services.set-platform-profile = {
+    description = "Set Dell platform profile to cool";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = ''
+        ${pkgs.bash}/bin/bash -c "echo cool > /sys/firmware/acpi/platform_profile"
+      '';
+    };
   };
 
   # --- System options ---
