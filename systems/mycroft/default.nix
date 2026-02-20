@@ -18,11 +18,10 @@
     hostId = "b709b6b5";
   };
 
-  # --- Dell fan controll ---
-  boot.kernelModules = [ "dell_smm_hwmon" ];
-  # boot.extraModprobeConfig = ''
-  #   options dell_smm_hwmon force=1 ignore_dmi=1
-  # '';
+  # --- Force Wayland to use Intel GPU ---
+  environment.sessionVariables = {
+    WLR_DRM_DEVICES = "/dev/dri/card1"; # card1 is intel card0 nvidia
+  };
 
   # --- System options ---
   systemOptions = {
