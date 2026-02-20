@@ -30,10 +30,11 @@ in
     environment.persistence."/persist" = {
       hideMounts = true;
       directories = [
+        "/etc/nixos"
+        "/etc/NetworkManager/system-connections"
         "/var/log"
         "/var/lib/nixos"
         "/var/lib/systemd"
-        "/etc/NetworkManager/system-connections"
       ];
 
       files = [
