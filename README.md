@@ -1,4 +1,12 @@
-# To do:
+# Nix-config
+
+## Systems
+- sherlock 
+- watson
+- mycroft
+- lestrade
+
+## To do:
 1. <s>Get dms running on login</s>
 2. <s>Simplify niri config/keybinds</s>
 3. DMS config 
