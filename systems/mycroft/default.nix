@@ -18,6 +18,12 @@
     hostId = "b709b6b5";
   };
 
+  # --- Dell fan controll ---
+  boot.kernelModules = [ "dell_smm_hwmon" ];
+  # boot.extraModprobeConfig = ''
+  #   options dell_smm_hwmon force=1 ignore_dmi=1
+  # '';
+
   # --- System options ---
   systemOptions = {
     systemType = "server";
