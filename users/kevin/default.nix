@@ -6,12 +6,13 @@
 }:
 let
   enabled = lib.elem "kevin" config.systemOptions.users;
+  sopsFile = ../../secrets/secrets.yaml;
 in
 lib.mkIf enabled {
   sops.secrets.kevinPassword = {
+    inherit sopsFile;
     neededForUsers = true;
-    sopsFile = ./secrets.yaml;
-    key = "password_hash";
+    key = "users.kevin.hashedPassword";
     owner = "root";
     group = "root";
     mode = "0400";
@@ -26,8 +27,6 @@ lib.mkIf enabled {
       "networkmanager"
     ];
     hashedPasswordFile = config.sops.secrets.kevinPassword.path;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOavirFl6Xk3GR2bFfGzX28RYqfwld5lnBdSjTTCAV/0 kevin@macbook"
-    ];
+    openssh.authorizedKeys.keys = [ ];
   };
 }
