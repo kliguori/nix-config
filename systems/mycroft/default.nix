@@ -38,6 +38,10 @@
 
   # --- System options ---
   systemOptions = {
+    users = [
+      "root"
+      "admin"
+    ];
     systemType = "server";
     desktop.enable = true;
     impermanence.enable = true;

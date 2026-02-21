@@ -2,7 +2,7 @@
 {
   options.systemOptions.users = lib.mkOption {
     type = lib.types.listOf lib.types.str;
-    default = [ ];
+    default = [ "root" ];
     description = "List of users to enable on system.";
   };
 
