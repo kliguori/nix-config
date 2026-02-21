@@ -14,7 +14,7 @@ in
         #   enable = lib.mkDefault true;
         #   database.enable = lib.mkDefault true;
         # };
-        # postgresql.enable = lib.mkDefault true;
+        postgresql.enable = lib.mkDefault true;
       };
     };
   };
