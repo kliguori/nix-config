@@ -12,7 +12,7 @@ in
   sops = {
     age = {
       inherit keyFile; 
-      generateKey = false;
+      generateKey = true;
       sshKeyPaths = lib.mkForce [ ];
     };
     gnupg.sshKeyPaths = lib.mkForce [ ];
