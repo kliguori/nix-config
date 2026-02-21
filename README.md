@@ -7,7 +7,6 @@
 - lestrade
 
 ## To do:
-- [ ] SOPS-Nix
 - [ ] Fix postgreSQL
 - [ ] Vaultwarden
 - [ ] Add tls to domain name
@@ -22,6 +21,8 @@
 - [ ] Finish making sherlock config dendritic, re-evaluate disk configs and impermanence model
 - [ ] Vim motions in terminal
 - [ ] Re-evaluate terminal choice
+- [ ] Test non-impermanent systems
+- [x] SOPS-Nix
 - [x] Make sure disko can add BTRFS subvols without being destructive
 - [x] Get dms running on login
 - [x] Jellyfin
