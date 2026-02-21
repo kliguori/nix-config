@@ -20,6 +20,10 @@
 
   # --- System options ---
   systemOptions = {
+    users = [
+      "root"
+      "kevin"
+    ];
     systemType = "laptop";
     impermanence.enable = true;
     hibernate = {
