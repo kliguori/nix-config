@@ -41,6 +41,7 @@
     users = [
       "root"
       "admin"
+      "kevin"
     ];
     systemType = "server";
     desktop.enable = true;
