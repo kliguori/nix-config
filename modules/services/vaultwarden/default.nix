@@ -25,9 +25,15 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [
-      "d ${toString cfg.dataDir} 0750 vaultwarden vaultwarden -"
-    ];
+    systemd = { 
+      services.vaultwarden.serviceConfig.ReadWritePaths = [
+        (toString cfg.dataDir)
+      ];
+
+      tmpfiles.rules = [
+        "d ${toString cfg.dataDir} 0750 vaultwarden vaultwarden -"
+      ];
+    };
 
     services.postgresql = lib.mkIf pgEnabled {
       ensureDatabases = [ dbName ];
