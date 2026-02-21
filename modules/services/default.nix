@@ -6,7 +6,7 @@
     ./tailscale
     ./powerManagement
     ./reverseProxy
-    # ./vaultwarden
+    ./vaultwarden
     ./jellyfin
     # ./paperless
     ./postgreSQL

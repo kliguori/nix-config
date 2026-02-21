@@ -65,6 +65,7 @@
       #   dataDir = "/data/paperless";
       #   consumptionDir = "/data/paperless/consume";
       # };
+      vaultwarden.dataDir = "/data/vaultwarden";
       postgresql.dataDir = "/data/postgresql";
     };
   };
