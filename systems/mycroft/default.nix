@@ -18,6 +18,9 @@
     hostId = "b709b6b5";
   };
 
+  # --- Sudo w/o password ---
+  security.sudo.wheelNeedsPassword = false;
+
   # --- Force Wayland to use Intel GPU ---
   environment.sessionVariables = {
     WLR_DRM_DEVICES = "/dev/dri/card1"; # card1 is intel card0 nvidia
