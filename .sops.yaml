@@ -1,4 +1,4 @@
 creation_rules:
-  - path_regex: nixos/.*\.ya?ml$
+  - path_regex: '.*\.ya?ml$'
     age:
       - age1ahxg9264t6e0x9e5wdt68wvqj2r8vrguyjfv5wapy06w99nhuv8spefrng
