@@ -12,7 +12,7 @@ lib.mkIf enabled {
   sops.secrets.kevinPassword = {
     inherit sopsFile;
     neededForUsers = true;
-    key = "users.kevin.hashedPassword";
+    key = "users/kevin/hashedPassword";
     owner = "root";
     group = "root";
     mode = "0400";
