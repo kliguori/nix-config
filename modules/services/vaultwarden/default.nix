@@ -41,9 +41,9 @@ in
 
     services.vaultwarden = {
       enable = true;
-      dataDir = toString cfg.dataDir;
       config = {
         ROCKET_ADDRESS = "127.0.0.1";
+        DATA_FOLDER = toString cfg.dataDir;
         ROCKET_PORT = 8222;
         WEBSOCKET_ENABLED = true;
         SIGNUPS_ALLOWED = cfg.signupsAllowed;
