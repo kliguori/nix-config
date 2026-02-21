@@ -41,7 +41,7 @@ in
 
     services.vaultwarden = {
       enable = true;
-      package = pkgs.vaultwarden-postgresql;
+      dbBackend = "postgresql";
       config = {
         ROCKET_ADDRESS = "127.0.0.1";
         DATA_FOLDER = toString cfg.dataDir;
