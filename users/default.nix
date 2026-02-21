@@ -17,5 +17,5 @@ in
     description = "List of users to enable on system.";
   };
 
-  config.imports = selectedUsers;
+  imports = selectedUsers;
 }
