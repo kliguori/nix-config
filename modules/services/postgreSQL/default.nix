@@ -18,5 +18,9 @@ in
       enable = true;
       dataDir = toString cfg.dataDir;
     };
+    
+    systemd.tmpfiles.rules = [
+      "d ${toString cfg.dataDir} 0700 postgres postgres -"
+    ];
   };
 }
