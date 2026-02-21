@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   cfg = config.systemOptions.services.vaultwarden;
   rpEnabled = config.systemOptions.services.reverseProxy.enable or false;
@@ -41,6 +41,7 @@ in
 
     services.vaultwarden = {
       enable = true;
+      package = pkgs.vaultwarden-postgresql;
       config = {
         ROCKET_ADDRESS = "127.0.0.1";
         DATA_FOLDER = toString cfg.dataDir;
