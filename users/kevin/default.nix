@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   sops.secrets.kevinPassword = {
+    neededForUsers = true;
     sopsFile = ./secrets.yaml;
     key = "password_hash";
     owner = "root";

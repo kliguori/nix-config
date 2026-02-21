@@ -7,6 +7,7 @@ in
   sops.age = {
     keyFile = "${sopsDir}/key.txt";
     generateKey = false;
+    sshKeyPaths = lib.mkForce [ ];
   };
 
   environment.persistence."/persist".directories = lib.mkIf cfg.impermanence.enable [
