@@ -40,5 +40,7 @@ in
       80
       443
     ];
+
+    users.users.nginx.extraGroups = [ "acme" ]; # to access the cert
   };
 }

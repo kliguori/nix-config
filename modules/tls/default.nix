@@ -1,6 +1,8 @@
 { config, lib, ... }:
 let
   cfg = config.systemOptions.tls;
+  impermanenceEnabled = config.systemOptions.impermanence.enable;
+
   sopsFile = ../../secrets/secrets.yaml;
 in
 {
@@ -42,7 +44,13 @@ in
         extraDomainNames = [ "*.liguorihome.com" ];
         dnsProvider = "cloudflare";
         credentialsFile = config.sops.templates.cloudflare-dns.path;
+        group = "acme";
       };
+    };
+    environment.persistence."/persist" = lib.mkIf impermanenceEnabled {
+      directories = [
+        "/var/lib/acme"
+      ];
     };
   };
 }
