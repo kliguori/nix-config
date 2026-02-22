@@ -13,7 +13,6 @@ let
   nginxEnabled = nginx.enable;
   pgEnabled = pg.enable;
 
-  scheme = if tlsEnabled then "https" else "http";
   host = "vault.${nginx.baseDomain}";
   dbName = "vaultwarden";
   dbUser = "vaultwarden";
@@ -72,7 +71,7 @@ in
           WEBSOCKET_ENABLED = true;
           SIGNUPS_ALLOWED = cfg.signupsAllowed;
           DATABASE_URL = "postgresql://${dbUser}@/${dbName}?host=/run/postgresql";
-          DOMAIN = "${scheme}://${host}";
+          DOMAIN = "https://${host}";
         };
       };
 
@@ -87,8 +86,8 @@ in
       };
 
       nginx.virtualHosts."${host}" = {
-        enableACME = tlsEnabled;
-        forceSSL = tlsEnabled;
+        useACMEHost = nginx.baseDomain;
+        forceSSL = true;
 
         locations."/" = {
           proxyPass = "http://127.0.0.1:8222";

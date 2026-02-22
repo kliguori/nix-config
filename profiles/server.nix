@@ -8,14 +8,14 @@ in
       desktop.enable = lib.mkDefault false;
       tls.enable = lib.mkDefault true;
       services = {
-        # nginx.enable = lib.mkDefault true;
+        postgresql.enable = lib.mkDefault true;
+        nginx.enable = lib.mkDefault true;
         vaultwarden.enable = lib.mkDefault true;
-        # jellyfin.enable = lib.mkDefault true;
+        jellyfin.enable = lib.mkDefault true;
         # paperless = {
         #   enable = lib.mkDefault true;
         #   database.enable = lib.mkDefault true;
         # };
-        postgresql.enable = lib.mkDefault true;
       };
     };
   };

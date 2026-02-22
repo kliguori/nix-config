@@ -59,8 +59,6 @@
     };
     services = {
       powerManagement.enable = true;
-      nginx.enable = true;
-      jellyfin.enable = true;
       # paperless = {
       #   dataDir = "/data/paperless";
       #   consumptionDir = "/data/paperless/consume";

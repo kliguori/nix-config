@@ -27,8 +27,8 @@ in
     services = {
       jellyfin.enable = true;
       nginx.virtualHosts."${host}" = {
-        enableACME = tlsEnabled;
-        forceSSL = tlsEnabled;
+        useACMEHost = nginx.baseDomain;
+        forceSSL = true;
 
         locations."/" = {
           proxyPass = "http://127.0.0.1:8096";
