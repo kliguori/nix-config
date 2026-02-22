@@ -48,7 +48,6 @@
     ];
     systemType = "server";
     desktop.enable = true;
-    impermanence.enable = true;
     nvidia = {
       enable = true;
       prime = {

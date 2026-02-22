@@ -25,7 +25,6 @@
       "kevin"
     ];
     systemType = "laptop";
-    impermanence.enable = true;
     hibernate = {
       enable = true;
       resumeDevice = "/dev/vg/swap";
