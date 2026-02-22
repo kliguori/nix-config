@@ -9,22 +9,12 @@ in
   options.systemOptions.tls.enable = lib.mkEnableOption "Enable ACME TLS (Cloudflare DNS-01)";
 
   config = lib.mkIf cfg.enable {
-    sops.secrets = {
-      cloudflareToken = {
-        inherit sopsFile;
-        key = "cloudflare/dns_api_token";
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
-
-      acmeEmail = {
-        inherit sopsFile;
-        key = "users/kevin/email";
-        owner = "root";
-        group = "root";
-        mode = "0400";
-      };
+    sops.secrets.cloudflareToken = {
+      inherit sopsFile;
+      key = "cloudflare/dns_api_token";
+      owner = "root";
+      group = "root";
+      mode = "0400";
     };
 
     sops.templates.cloudflare-dns = {
@@ -38,7 +28,7 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = config.sops.placeholder."acmeEmail";
+      defaults.email = "liguori.km@gmail.com"; 
       certs."liguorihome.com" = {
         domain = "liguorihome.com";
         extraDomainNames = [ "*.liguorihome.com" ];
