@@ -19,6 +19,7 @@
 - [ ] Make home manager dendritic
 - [ ] Firefox config including ad blocking
 - [ ] DMS config 
+- [ ] Lanzaboote
 - [ ] Expose some services?
 - [ ] Vim motions in terminal
 - [ ] Re-evaluate terminal choice
