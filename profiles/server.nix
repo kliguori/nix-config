@@ -8,7 +8,7 @@ in
       desktop.enable = lib.mkDefault false;
       tls.enable = lib.mkDefault true;
       services = {
-        # reverseProxy.enable = lib.mkDefault true;
+        # nginx.enable = lib.mkDefault true;
         vaultwarden.enable = lib.mkDefault true;
         # jellyfin.enable = lib.mkDefault true;
         # paperless = {

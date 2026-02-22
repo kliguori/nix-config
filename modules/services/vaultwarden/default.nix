@@ -1,9 +1,20 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 let
   cfg = config.systemOptions.services.vaultwarden;
-  rpEnabled = config.systemOptions.services.reverseProxy.enable or false;
-  pgEnabled = config.systemOptions.services.postgresql.enable or false;
+  nginx = config.systemOptions.services.nginx;
+  pg = config.systemOptions.services.postgresql;
+  tls = config.systemOptions.tls;
 
+  tlsEnabled = tls.enable;
+  nginxEnabled = nginx.enable;
+  pgEnabled = pg.enable;
+
+  scheme = if tlsEnabled then "https" else "http";
+  host = "vault.${nginx.baseDomain}";
   dbName = "vaultwarden";
   dbUser = "vaultwarden";
 in
@@ -25,7 +36,22 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd = { 
+    assertions = [
+      {
+        assertion = pgEnabled;
+        message = "vaultwarden.enable requires postgresql.enable = true.";
+      }
+      {
+        assertion = nginxEnabled;
+        message = "vaultwarden.enable requires nginx.enable = true.";
+      }
+      {
+        assertion = tlsEnabled;
+        message = "vaultwarden.enable requires tls.enable = true.";
+      }
+    ];
+
+    systemd = {
       services.vaultwarden.serviceConfig.ReadWritePaths = [
         (toString cfg.dataDir)
       ];
@@ -35,59 +61,40 @@ in
       ];
     };
 
-    services.postgresql = lib.mkIf pgEnabled {
-      ensureDatabases = [ dbName ];
-      ensureUsers = [
-        {
-          name = dbUser;
-          ensureDBOwnership = true;
-        }
-      ];
-    };
-
-    services.vaultwarden = {
-      enable = true;
-      dbBackend = "postgresql";
-      config = {
-        ROCKET_ADDRESS = "127.0.0.1";
-        DATA_FOLDER = toString cfg.dataDir;
-        ROCKET_PORT = 8222;
-        WEBSOCKET_ENABLED = true;
-        SIGNUPS_ALLOWED = cfg.signupsAllowed;
-      }
-      // lib.optionalAttrs pgEnabled {
-        DATABASE_URL = "postgresql://${dbUser}@/${dbName}?host=/run/postgresql";
-      }
-      // lib.optionalAttrs rpEnabled (
-        let
-          rp = config.systemOptions.services.reverseProxy;
-          tls = rp.enableTLS or false;
-          host = "vault.${rp.baseDomain}";
-          scheme = if tls then "https" else "http";
-        in
-        {
+    services = {
+      vaultwarden = {
+        enable = true;
+        dbBackend = "postgresql";
+        config = {
+          ROCKET_ADDRESS = "127.0.0.1";
+          DATA_FOLDER = toString cfg.dataDir;
+          ROCKET_PORT = 8222;
+          WEBSOCKET_ENABLED = true;
+          SIGNUPS_ALLOWED = cfg.signupsAllowed;
+          DATABASE_URL = "postgresql://${dbUser}@/${dbName}?host=/run/postgresql";
           DOMAIN = "${scheme}://${host}";
-        }
-      );
-    };
-
-    services.nginx.virtualHosts = lib.mkIf rpEnabled (
-      let
-        rp = config.systemOptions.services.reverseProxy;
-        tls = rp.enableTLS or false;
-        host = "vault.${rp.baseDomain}";
-      in
-      {
-        ${host} = {
-          enableACME = tls;
-          forceSSL = tls;
-
-          locations."/" = {
-            proxyPass = "http://127.0.0.1:8222";
-            proxyWebsockets = true;
-          };
         };
-      }
-    );
+      };
+
+      postgresql = {
+        ensureDatabases = [ dbName ];
+        ensureUsers = [
+          {
+            name = dbUser;
+            ensureDBOwnership = true;
+          }
+        ];
+      };
+
+      nginx.virtualHosts."${host}" = {
+        enableACME = tlsEnabled;
+        forceSSL = tlsEnabled;
+
+        locations."/" = {
+          proxyPass = "http://127.0.0.1:8222";
+          proxyWebsockets = true;
+        };
+      };
+    };
   };
 }
