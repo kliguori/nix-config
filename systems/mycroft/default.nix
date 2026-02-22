@@ -4,9 +4,9 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-laptop
+    ../modules
+    ../users
     ../../profiles
-    ../../modules
-    ../../users
   ];
 
   # --- State version ---
@@ -59,7 +59,7 @@
     };
     services = {
       powerManagement.enable = true;
-      reverseProxy.enable = true;
+      nginx.enable = true;
       jellyfin.enable = true;
       # paperless = {
       #   dataDir = "/data/paperless";

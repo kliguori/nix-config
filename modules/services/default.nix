@@ -5,7 +5,7 @@
     ./fstrim
     ./tailscale
     ./powerManagement
-    ./reverseProxy
+    ./nginx
     ./vaultwarden
     ./jellyfin
     # ./paperless

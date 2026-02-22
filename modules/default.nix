@@ -8,5 +8,6 @@
     ./services
     ./hibernate
     ./nvidia
+    ./tls
   ];
 }

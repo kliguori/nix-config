@@ -6,6 +6,7 @@ in
   config = lib.mkIf (cfg.systemType == "server") {
     systemOptions = {
       desktop.enable = lib.mkDefault false;
+      tls.enable = lib.mkDefault true;
       services = {
         # reverseProxy.enable = lib.mkDefault true;
         vaultwarden.enable = lib.mkDefault true;

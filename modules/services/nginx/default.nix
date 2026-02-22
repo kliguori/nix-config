@@ -1,9 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.systemOptions.services.reverseProxy;
+  cfg = config.systemOptions.services.nginx;
+  tlsEnabled = config.systemOptions.tls.enable;
 
   ports =
-    if cfg.enableTLS then
+    if tlsEnabled then
       [
         80
         443
@@ -22,25 +23,13 @@ let
       };
 in
 {
-  options.systemOptions.services.reverseProxy = {
-    enable = lib.mkEnableOption "Reverse proxy (nginx) platform";
+  options.systemOptions.services.nginx = {
+    enable = lib.mkEnableOption "Nginx platform";
 
     baseDomain = lib.mkOption {
       type = lib.types.str;
       default = "liguorihome.com";
       description = "Base domain used by service modules when registering vhosts (e.g. jellyfin.<baseDomain>).";
-    };
-
-    enableTLS = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Enable TLS via ACME.";
-    };
-
-    acmeEmail = lib.mkOption {
-      type = lib.types.nullOr lib.types.str;
-      default = null;
-      description = "Email used for ACME registration (required if enableTLS = true).";
     };
 
     exposeInterfaces = lib.mkOption {
@@ -57,23 +46,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    assertions = lib.optional cfg.enableTLS {
-      assertion = cfg.acmeEmail != null;
-      message = "reverseProxy.acmeEmail must be set when enableTLS = true";
-    };
-
     services.nginx = {
       enable = true;
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
     };
-
-    security.acme = lib.mkIf cfg.enableTLS {
-      acceptTerms = true;
-      defaults.email = cfg.acmeEmail;
-    };
-
     networking.firewall = lib.mkIf cfg.openFirewall firewallConfig;
   };
 }

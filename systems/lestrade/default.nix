@@ -4,9 +4,9 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-pc-laptop
+    ../modules
+    ../users
     ../../profiles
-    ../../modules 
-    ../../users
   ];
 
   # --- State version ---
