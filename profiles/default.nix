@@ -6,9 +6,16 @@
     ./server.nix
   ];
 
-  options.systemOptions.systemType = lib.mkOption {
-    type = lib.types.enum [ "laptop" "desktop" "server" ];
-    description = "The role of this system. Required, no default.";
+  options.systemOptions.profiles = lib.mkOption {
+    type = lib.types.listOf (
+      lib.types.enum [
+        "laptop"
+        "desktop"
+        "server"
+      ]
+    );
+    default = [ ];
+    description = "Profiles applied to the system.";
   };
 
   config = {
@@ -29,7 +36,10 @@
     # --- Nix settings ---
     nix = {
       settings = {
-        experimental-features = [ "nix-command" "flakes" ];
+        experimental-features = [
+          "nix-command"
+          "flakes"
+        ];
         auto-optimise-store = true;
         trusted-users = [ "@wheel" ];
       };
@@ -48,7 +58,7 @@
       useDHCP = lib.mkDefault true;
       networkmanager.enable = true;
     };
-    
+
     # --- Boot settings ---
     boot = {
       kernelParams = [ ];
@@ -56,12 +66,12 @@
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
       };
-      supportedFilesystems = [ 
-        "btrfs" 
+      supportedFilesystems = [
+        "btrfs"
         "zfs"
       ];
     };
-    
+
     # --- Hardware ---
     hardware.enableAllFirmware = true;
 

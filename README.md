@@ -9,7 +9,6 @@
 - moriarty (usb): install and recovery w/ persistent storage
 
 ## To do:
-- [ ] Make impermanence the default
 - [ ] Allow multiple profiles, look at redoing profiles
 - [ ] Paperless
 - [ ] Nextcloud
@@ -34,6 +33,7 @@
 - [ ] Expose some services?
 - [ ] Vim motions in terminal
 - [ ] Re-evaluate terminal choice
+- [x] Make impermanence the default
 - [x] Vaultwarden
 - [x] Add tls to domain name
 - [x] Fix postgreSQL

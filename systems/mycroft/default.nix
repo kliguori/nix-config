@@ -1,4 +1,9 @@
-{ inputs, hostName, pkgs, ... }:
+{
+  inputs,
+  hostName,
+  pkgs,
+  ...
+}:
 {
   # --- Imports ---
   imports = [
@@ -46,7 +51,10 @@
       "admin"
       "kevin"
     ];
-    systemType = "server";
+    profiles = [
+      "laptop"
+      "server"
+    ];
     desktop.enable = true;
     nvidia = {
       enable = true;
@@ -58,12 +66,6 @@
     };
     services = {
       powerManagement.enable = true;
-      # paperless = {
-      #   dataDir = "/data/paperless";
-      #   consumptionDir = "/data/paperless/consume";
-      # };
-      vaultwarden.dataDir = "/data/vaultwarden";
-      postgresql.dataDir = "/data/postgresql";
     };
   };
 }

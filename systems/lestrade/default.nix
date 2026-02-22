@@ -24,7 +24,7 @@
       "root"
       "kevin"
     ];
-    systemType = "laptop";
+    profiles = [ "laptop" ];
     hibernate = {
       enable = true;
       resumeDevice = "/dev/vg/swap";
