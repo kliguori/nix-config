@@ -3,6 +3,6 @@ let
   cfg = config.systemOptions;
 in
 {
-  config = lib.mkIf (cfg.systemType == "desktop") {
+  config = lib.mkIf (lib.elem "desktop" cfg.profiles) {
   };
 }

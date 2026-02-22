@@ -3,7 +3,7 @@ let
   cfg = config.systemOptions;
 in
 {
-  config = lib.mkIf (cfg.systemType == "server") {
+  config = lib.mkIf (lib.elem "server" cfg.profiles) {
     systemOptions = {
       desktop.enable = lib.mkDefault false;
       tls.enable = lib.mkDefault true;
