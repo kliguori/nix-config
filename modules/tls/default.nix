@@ -47,10 +47,9 @@ in
         group = "acme";
       };
     };
-    environment.persistence."/persist" = lib.mkIf impermanenceEnabled {
-      directories = [
-        "/var/lib/acme"
-      ];
-    };
+
+    environment.persistence."/persist".directories = lib.mkIf impermanenceEnabled [
+      "/var/lib/acme"
+    ];
   };
 }
