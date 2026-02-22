@@ -9,7 +9,6 @@
 - moriarty (usb): install and recovery w/ persistent storage
 
 ## To do:
-- [ ] Allow multiple profiles, look at redoing profiles
 - [ ] Paperless
 - [ ] Nextcloud
 - [ ] Remote access to network tailscale (headscale), netbird, wireguard, cloudflare tunnels, Unifi vpn?
@@ -33,6 +32,7 @@
 - [ ] Expose some services?
 - [ ] Vim motions in terminal
 - [ ] Re-evaluate terminal choice
+- [x] Allow multiple profiles, look at redoing profiles
 - [x] Make impermanence the default
 - [x] Vaultwarden
 - [x] Add tls to domain name
