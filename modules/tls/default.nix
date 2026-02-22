@@ -28,8 +28,10 @@ in
 
     security.acme = {
       acceptTerms = true;
-      defaults.email = "liguori.km@gmail.com";
-      dnsResolver = [ "1.1.1.1:53" ];
+      defaults = {
+        email = "liguori.km@gmail.com";
+        dnsResolver = "1.1.1.1:53";
+      };
       certs."liguorihome.com" = {
         domain = "liguorihome.com";
         extraDomainNames = [ "*.liguorihome.com" ];
