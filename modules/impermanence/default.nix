@@ -4,7 +4,11 @@ let
 in
 {
   options.systemOptions.impermanence = {
-    enable = lib.mkEnableOption "Impermanent root with persistence under /persist" // { default = true; };
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Impermanent root with persistence under /persist";
+    };
 
     rootTmpfsSize = lib.mkOption {
       type = lib.types.str;
